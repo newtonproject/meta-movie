@@ -1,0 +1,22 @@
+.footer {
+  @apply mt-20 md:mt-28;
+  > div {
+    @apply flex mx-4 md:mx-32 mb-3;
+    img {
+      @apply w-24 h-auto;
+    }
+    > div {
+      @apply flex items-center justify-center ml-auto self-end;
+      img {
+        @apply w-9 h-auto ml-5;
+      }
+    }
+  }
+  span {
+    @apply block w-full bg-gray999;
+    height: 1px;
+  }
+  p {
+    @apply w-full text-xs text-center md:text-right text-gray999 leading-7 mt-3 mb-8 px-4 md:px-32;
+  }
+}

@@ -1,0 +1,25 @@
+.faq {
+  @apply mx-4 md:mx-32;
+  h2 {
+    @apply mt-16 md:mt-40 mb-5 text-4xl md:text-6xl font-bold text-center;
+  }
+  button {
+    @apply pt-7 flex w-full items-center md:justify-center text-left;
+    > svg {
+      @apply w-2 h-2;
+    }
+    i {
+      @apply block w-0 h-0 ml-3;
+      border: 5px solid transparent;
+      border-top: 5px solid #333;
+    }
+  }
+  span {
+    @apply flex text-lg md:text-2xl font-bold text-gray333;
+  }
+  > div {
+    > div {
+      @apply pt-4 text-left md:text-center text-sm leading-8 text-gray3d;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.crypto {
+  @apply mx-4 md:mx-28 mb-14 md:mb-28;
+  h2 {
+    @apply mt-14 md:mt-40 mb-6 md:mb-20 text-center text-4xl md:text-6xl font-bold;
+  }
+  p {
+    @apply text-gray3d text-center leading-8 mt-6 md:mt-8;
+  }
+}
+.cryptoImgBox {
+  @apply w-full mt-9;
+}
+.cryptoItem {
+  @apply relative border-solid border-gray666 rounded-3xl border-2;
+  img {
+    @apply rounded-2xl w-[90%] h-auto mx-auto my-3;
+  }
+  p {
+    @apply absolute text-grayf text-lg md:text-2xl font-bold bottom-6 left-7;
+  }
+}
+.support {
+  @apply mx-4 md:mx-28;
+  h2 {
+    @apply mt-14 md:mt-40 mb-6 md:mb-20 text-center text-4xl md:text-6xl font-bold;
+  }
+  > ul {
+    @apply hidden md:block;
+    > li {
+      @apply flex items-center justify-between;
+    }
+    img {
+      @apply w-full md:w-[28%] h-auto;
+    }
+  }
+  > div {
+    @apply block md:hidden;
+  }
+}

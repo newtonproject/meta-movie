@@ -1,0 +1,60 @@
+.bid-container {
+  @apply flex flex-row rounded border-2 w-full;
+
+  > div {
+    @apply flex flex-col rounded border-t-0 border-2;
+  }
+}
+
+#cunnected {
+  @apply relative;
+  .cunnected-title {
+    button {
+      @apply w-44 h-10 leading-10 text-center ml-4 border-solid border-greenbg border;
+    }
+  }
+  .cunnected-content {
+    @apply bg-white absolute top-12 right-0 py-5 px-4;
+    box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.3019607961177826);
+    button {
+      @apply ml-0 py-2 px-28 bg-grag1e text-white border-grag1e;
+    }
+    p {
+      @apply my-8 text-gray999;
+    }
+    img {
+      @apply w-28 h-auto;
+    }
+  }
+  .cunnectend-account {
+    button {
+      @apply flex items-center justify-center;
+    }
+    span {
+      @apply w-32 overflow-hidden text-xs text-gray666;
+    }
+    .logo {
+      @apply w-6 h-6;
+    }
+  }
+  .disconnect {
+    .disconnect-header {
+      @apply flex items-center justify-center;
+      span {
+        @apply py-1 px-2 ml-auto text-xs text-green-500 bg-green-300;
+      }
+    }
+    button {
+      @apply bg-red-600;
+    }
+    .copy {
+      @apply relative w-20 overflow-hidden  mt-4 text-xs text-gray999 mx-auto;
+    }
+    .ant-typography {
+      // @apply truncate;
+    }
+    .ant-typography-copy {
+      // @apply absolute top-0 right-0;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+#headlessui-portal-root {
+  position: fixed;
+  top: 100px;
+  left: 0;
+}
+html {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  line-height: 1.5;
+}
+a,
+input,
+button,
+img,
+div,
+p {
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-focus-ring-color: rgba(0, 0, 0, 0);
+}
+i {
+  font-style: normal;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.swiper-slide {
+  width: 62% !important;
+  margin-right: 26px !important;
+}
+
+@media (min-width: 768px) {
+  .swiper-slide {
+    width: 18% !important;
+  }
+  #auctions {
+    .swiper-slide {
+      width: 100% !important;
+      margin-right: 0 !important;
+    }
+  }
+}
+@media (min-width: 208px) {
+  #auctions {
+    .swiper-slide {
+      width: 100% !important;
+      margin-right: 0 !important;
+    }
+  }
+}
+
+.swiper-container .swiper-wrapper {
+  transition-timing-function: linear !important;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -ms-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  transition-timing-function: linear;
+}
+
+.auctionsBg {
+  @apply bg-auctionsbg;
+  // background: url(../../public/assets/image/auctiongbg.png) no-repeat;
+  background-size: cover;
+}
+
+.supportBox {
+  .swiper {
+    --swiper-pagination-color: #e82def;
+  }
+}
+#headlessui-portal-root {
+  width: 100%;
+  height: 100%;
+  top: 50px;
+  background-color: #fff;
+}

@@ -1,0 +1,19 @@
+body {
+  @apply bg-white;
+}
+
+.movie {
+  @apply max-h-96;
+  @apply flex flex-col items-center;
+  @apply static;
+
+  .content {
+    @apply w-[375px] h-[700px];
+    @apply relative;
+
+    .wallet {
+      @apply absolute;
+      @apply top-0 right-0;
+    }
+  }
+}

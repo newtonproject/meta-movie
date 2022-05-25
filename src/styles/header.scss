@@ -1,0 +1,107 @@
+.header {
+  @apply fixed w-full px-4 md:px-32 bg-grayf z-50;
+  dl {
+    @apply relative ml-3 h-4 leading-4 cursor-pointer;
+    &:hover {
+      dd {
+        @apply block w-auto h-10;
+      }
+    }
+  }
+  dd {
+    @apply hidden absolute top-5 right-0 leading-6;
+  }
+}
+.menu-header {
+  @apply border-solid  border-grayd8 mx-4;
+  border-top-width: 1px;
+  > p {
+    span {
+      @apply flex items-center justify-center w-full;
+    }
+    a {
+      @apply py-12 border-solid  border-grayd8 w-6/12 text-center;
+      border-bottom-width: 1px;
+      &:nth-child(2n) {
+        @apply border-solid border-l-[1px] border-grayd8;
+        border-left-width: 1px;
+      }
+    }
+  }
+  > span {
+    @apply flex items-center justify-center mt-10;
+    img {
+      @apply w-8 h-auto;
+      &:nth-child(1) {
+        @apply mr-6;
+      }
+    }
+  }
+  #cunnected {
+    .cunnected-content {
+      @apply left-0 top-24;
+    }
+  }
+
+  .cunnected-title {
+    button {
+      @apply mt-11;
+    }
+  }
+}
+.header-pc {
+  @apply hidden w-full lg:block;
+  > div {
+    @apply flex h-24 w-full items-center justify-center;
+    > div {
+      @apply ml-auto flex items-center justify-center;
+      a {
+        @apply px-5;
+      }
+    }
+    span {
+      @apply pr-5 w-24 h-auto flex cursor-pointer;
+    }
+    img {
+      @apply w-full;
+    }
+    a {
+      @apply mx-5;
+    }
+  }
+  p {
+    @apply flex items-center justify-center;
+  }
+}
+
+.mobile-header {
+  @apply flex items-center justify-center w-full h-16 lg:hidden;
+  > a {
+    img {
+      @apply w-16 h-auto;
+    }
+  }
+  span {
+    @apply ml-1 mt-1 h-3 rounded px-1 text-xs leading-3 md:h-4;
+  }
+  > button {
+    @apply ml-auto;
+    svg {
+      @apply w-6 h-6;
+    }
+  }
+}
+.mobile-sidebar {
+  @apply w-full;
+}
+.header-close {
+  @apply border border-solid border-black text-center -z-50;
+}
+.header-close {
+  svg {
+    width: 16px !important;
+    height: 16px !important;
+    line-height: 16px !important;
+    text-align: center !important;
+  }
+}

@@ -1,0 +1,124 @@
+#auctions {
+  @apply pt-12 lg:pt-36 mx-0 lg:mx-60 flex items-center;
+  .auction-box {
+    @apply lg:flex lg:items-center lg:justify-center;
+  }
+  .auction-img {
+    img {
+      @apply pt-28 lg:pt-20 w-full lg:w-5/6 h-auto;
+    }
+  }
+  .auction-text {
+    @apply px-4 lg:px-4 ml-0 lg:ml-24;
+    p {
+      @apply flex items-center text-lg text-gray666 mt-9;
+    }
+    span {
+      @apply ml-auto text-4xl font-bold text-black;
+    }
+    h2 {
+      @apply text-gray333 text-4xl lg:text-5xl;
+    }
+    .text-title {
+      @apply absolute -top-7 left-0 lg:static px-4 lg:px-0;
+    }
+  }
+  .coming-soon {
+    @apply mt-20;
+  }
+  .actions-countdown {
+    @apply lg:pt-0;
+    padding-top: 22%;
+    p {
+      @apply relative;
+    }
+    input {
+      @apply w-full pl-3 pr-36 h-20  text-lg bg-white rounded-xl;
+      box-shadow: 5px 6px 13px 1px rgba(229, 229, 229, 0.6000000238418579);
+    }
+    .place {
+      @apply absolute top-0 right-0 h-20 text-white text-center text-lg px-6 bg-grage1 rounded-lg;
+      box-shadow: 3px 5px 10px 1px #efebef;
+    }
+  }
+  .actioning {
+    .place {
+      @apply bg-grage8;
+    }
+    .place-tit {
+      @apply block lg:flex;
+      i {
+        @apply block lg:inline-block;
+      }
+    }
+    .bids {
+      h3,
+      p,
+      span {
+        @apply text-gray666 text-sm;
+      }
+      p {
+        @apply border-solid border-gragee;
+        border-bottom-width: 1px;
+      }
+      span {
+        @apply font-normal;
+      }
+    }
+    h3 {
+      @apply text-center py-4;
+    }
+  }
+  .action-end {
+    @apply text-2xl text-gray333;
+    h5 {
+      @apply py-9;
+    }
+    p {
+      @apply mt-3;
+    }
+    span {
+      @apply text-xl text-gray999 ml-2;
+    }
+    i {
+      @apply ml-2;
+    }
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    @apply top-1/2  lg:top-12;
+  }
+  .swiper-button-next {
+    @apply right-0 left-40;
+  }
+  .swiper-pagination-fraction {
+    @apply top-1/2 lg:top-0;
+  }
+  .swiper-pagination {
+    @apply lg:text-left lg:ml-16;
+  }
+  .swiper-button-prev {
+    @apply lg:left-0 left-1/4;
+  }
+  .swiper-pagination-current {
+    @apply text-7xl;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    @apply lg:justify-start;
+  }
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    @apply w-8 h-3 bg-contain bg-no-repeat;
+  }
+  .swiper-button-next:after {
+    @apply bg-nextbg;
+  }
+  .swiper-button-prev:after {
+    @apply bg-prevbg;
+  }
+}
+:root {
+  --swiper-navigation-size: 0 !important;
+  --swiper-theme-color: rgba(#fff, #fff, #fff, 0) !important;
+}
