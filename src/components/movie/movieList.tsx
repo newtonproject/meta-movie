@@ -1,0 +1,93 @@
+import { useQuery } from "@apollo/client";
+import { parseEther } from "@ethersproject/units";
+import { useWeb3React } from "@web3-react/core";
+import { POLLING_INTERVAL } from "constant/connectors";
+import {
+  NEXT_PUBLIC_FLOWER_CONTRACT_ADDRESS,
+  TARGET_CHAINID,
+} from "constant/settings";
+import useBlock from "hooks/useBlock";
+import { useFlowerContract } from "hooks/useContract";
+import { FlowerList, Memory, Property } from "model/flower";
+import React, { useRef, useState } from "react";
+import { NFT_FLOWER } from "services/queryMemory";
+import {
+  getBlockUrl,
+  hexAddress2NewAddress,
+  shortAddress,
+} from "utils/NewChainUtils";
+import Auction from "components/auction";
+import transactor from "component/transactor";
+
+export default function MovieList() {
+  const { library } = useWeb3React();
+
+  const item1 = {
+    address: "NEW5154...wdWM",
+    time: "1 hour ago",
+    name: "Free Guy",
+    cover: "/assets/image/cover1.png",
+    price: "2,000,000 NEW",
+    description:
+      "Here is the video Description Here is the video Description Here is the video",
+  };
+
+  const item2 = {
+    address: "NEW5154...wdWM",
+    time: "1 hour ago",
+    name: "Free Guy",
+    cover: "/assets/image/cover2.png",
+    price: "2,000,000 NEW",
+    description:
+      "Here is the video Description Here is the video Description Here is the video",
+  };
+
+  const list = [
+    item1,
+    item2,
+    item1,
+    item2,
+    item1,
+    item2,
+    item1,
+    item2,
+    item1,
+    item2,
+    item1,
+    item2,
+  ];
+
+  function MovieListItem(props) {
+    const { item } = props;
+    return (
+      <div className="list-item" key={item.name}>
+        <span className="address">{item.address}</span>
+        <span className="time">{item.time}</span>
+        <span className="name">{item.name}</span>
+        <div className="cover-container">
+          <img
+            className="cover"
+            src={item.cover}
+            alt="cover"
+            onClick={() => {}}
+          />
+          <button className="preview">Preview</button>
+        </div>
+        <span className="price">{item.price}</span>
+        <span className="description">{item.description}</span>
+        <div className="panel">
+          <button>Buy</button>
+          <span className="">剩余购买次数10次</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="movie-container">
+      {list.map((item) => {
+        return <MovieListItem item={item} />;
+      })}
+    </div>
+  );
+}

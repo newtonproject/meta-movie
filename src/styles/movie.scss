@@ -3,9 +3,10 @@ body {
 }
 
 .movie {
-  @apply max-h-96;
+  @apply h-screen;
   @apply flex flex-col items-center;
   @apply static;
+  //   @apply bg-red-500;
 
   .content {
     @apply w-[375px] h-[700px];
@@ -14,6 +15,83 @@ body {
     .wallet {
       @apply absolute;
       @apply top-0 right-0;
+    }
+  }
+
+  .movie-container {
+    @apply w-[375px] mt-12;
+    @apply overflow-y-auto;
+    height: calc(100% - 29px);
+
+    .list-item {
+      @apply h-auto w-full mb-10;
+      @apply flex flex-col;
+
+      .address {
+        @apply font-normal text-base;
+      }
+
+      .time {
+        @apply font-normal text-sm text-gray3d;
+      }
+
+      .name {
+        @apply font-normal text-xl mt-2;
+      }
+
+      .price {
+        @apply font-semibold text-2xl mt-2;
+      }
+
+      .description {
+        @apply font-normal text-sm text-gray3d mt-2;
+      }
+
+      .cover-container {
+        @apply mt-2 text-center;
+
+        .cover {
+          @apply w-full h-40 bg-red-600 object-cover;
+        }
+
+        .preview {
+          @apply rounded-2xl w-28 h-8 relative bottom-24;
+          @apply text-white bg-black/50;
+        }
+      }
+      .panel {
+        @apply w-full flex flex-row justify-between p-0 items-center mt-4;
+
+        button {
+          @apply bg-red-400 font-semibold text-white text-lg py-1;
+          width: calc(100% - 200px);
+        }
+
+        span {
+          @apply font-normal text-base text-gray666;
+        }
+      }
+    }
+  }
+
+  .footer {
+    @apply absolute;
+    @apply bottom-0 left-0 w-screen h-20;
+    @apply bg-white;
+    @apply flex flex-row justify-between;
+
+    .tab {
+      @apply flex flex-col items-center py-2 px-4 h-full w-full;
+
+      .tab-icon {
+        @apply w-10 h-10;
+      }
+      .tab-center {
+        @apply w-14 h-14 m-2;
+      }
+      span {
+        @apply text-center bg-white;
+      }
     }
   }
 }
