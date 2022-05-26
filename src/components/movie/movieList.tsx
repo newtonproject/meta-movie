@@ -1,23 +1,13 @@
-import { useQuery } from "@apollo/client";
-import { parseEther } from "@ethersproject/units";
+/*
+ * @Author: pony@diynova.com
+ * @Date: 2022-05-26 14:21:34
+ * @LastEditors: pony@diynova.com
+ * @LastEditTime: 2022-05-26 14:30:51
+ * @FilePath: /secure-movie/src/components/movie/movieList.tsx
+ * @Description: 
+ */
 import { useWeb3React } from "@web3-react/core";
-import { POLLING_INTERVAL } from "constant/connectors";
-import {
-  NEXT_PUBLIC_FLOWER_CONTRACT_ADDRESS,
-  TARGET_CHAINID,
-} from "constant/settings";
-import useBlock from "hooks/useBlock";
-import { useFlowerContract } from "hooks/useContract";
-import { FlowerList, Memory, Property } from "model/flower";
-import React, { useRef, useState } from "react";
-import { NFT_FLOWER } from "services/queryMemory";
-import {
-  getBlockUrl,
-  hexAddress2NewAddress,
-  shortAddress,
-} from "utils/NewChainUtils";
-import Auction from "components/auction";
-import transactor from "component/transactor";
+import React, {  } from "react";
 
 export default function MovieList() {
   const { library } = useWeb3React();
@@ -85,8 +75,8 @@ export default function MovieList() {
 
   return (
     <div className="movie-container">
-      {list.map((item) => {
-        return <MovieListItem item={item} />;
+      {list.map((item, indexed) => {
+        return <MovieListItem key={indexed} item={item} />;
       })}
     </div>
   );
