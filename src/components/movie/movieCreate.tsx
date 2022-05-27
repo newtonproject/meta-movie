@@ -21,9 +21,8 @@ import transactor from "../../components/transactor";
 import MovieList from "./movieList";
 import MovieMine from "./movieMine";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Link from "next/link";
 
-export default function MovieHome() {
+export default function MovieCreate() {
   const { library } = useWeb3React();
   const [tabSelected, setTabSelected] = useState(0);
 
@@ -46,14 +45,12 @@ export default function MovieHome() {
           <span>Home</span>
         </div>
         <div className="tab">
-          <Link href="create" passHref>
           <img
             className="tab-center"
             src="/assets/image/add.png"
             alt="water"
+            onClick={() => {}}
           />
-          </Link>
-          
         </div>
         <div
           className="tab"

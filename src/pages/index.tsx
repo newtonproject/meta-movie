@@ -11,13 +11,16 @@ import React from "react";
 import { Web3ReactProvider } from "@web3-react/core";
 import Header from "../components/header";
 import getLibrary from "../utils/contractUtil";
-import MovieHome from "components/movie/movieHome";
+import MovieHome from "../components/movie/movieHome";
+import MovieCreate from "../components/movie/movieCreate";
+import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
 
 export default function Home() {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <div className={"container"}>
-        <MovieHome />
+      <MovieHome />
+        
       </div>
     </Web3ReactProvider>
   );

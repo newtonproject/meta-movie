@@ -2,12 +2,12 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Typography } from "antd";
 import { useWeb3React } from "@web3-react/core";
-import { injected } from "constant/connectors";
-import { useEagerConnect, useInactiveListener } from "hooks/useWeb3";
-import useBalance from "hooks/useBalance";
+import { injected } from "../constant/connectors";
+import { useEagerConnect, useInactiveListener } from "../hooks/useWeb3";
+import useBalance from "../hooks/useBalance";
 import { formatEther } from "@ethersproject/units";
-import { hexAddress2NewAddress, shortAddress } from "utils/NewChainUtils";
-import { TARGET_CHAINID } from "constant/settings";
+import { hexAddress2NewAddress, shortAddress } from "../utils/NewChainUtils";
+import { TARGET_CHAINID } from "../constant/settings";
 
 export default function Auction() {
   const { Paragraph } = Typography;
@@ -41,13 +41,13 @@ export default function Auction() {
   }, [activatingConnector, connector]);
 
   return (
-    <div id="cunnected">
+    <div id="connected">
       <Menu as="div">
         {({ open }) => (
           <>
             {active ? (
               <>
-                <div className="cunnected-title cunnectend-account">
+                <div className="connected-title connected-account">
                   <Menu.Button className="">
                     <span>
                       {shortAddress(
@@ -71,7 +71,7 @@ export default function Auction() {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="cunnected-content disconnect">
+                  <Menu.Items className="connected-content disconnect">
                     <div>
                       <div className="disconnect-header">
                         <img src="/assets/image/newton.png" alt="img" />
@@ -91,7 +91,7 @@ export default function Auction() {
               </>
             ) : (
               <>
-                <div className="cunnected-title">
+                <div className="connected-title">
                   <Menu.Button className="">Connect wallet</Menu.Button>
                 </div>
                 <Transition
@@ -104,7 +104,7 @@ export default function Auction() {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="cunnected-content">
+                  <Menu.Items className="connected-content">
                     <div>
                       <img src="/assets/image/newton.png" alt="img" />
                       <p> Not Connected</p>

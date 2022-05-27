@@ -3,7 +3,7 @@ body {
 }
 
 .movie {
-  @apply h-screen;
+  @apply h-screen overflow-hidden;
   @apply flex flex-col items-center;
   @apply static;
   //   @apply bg-red-500;
@@ -14,37 +14,37 @@ body {
 
     .wallet {
       @apply absolute;
-      @apply top-0 right-0;
+      @apply top-4 right-4;
     }
   }
 
   .movie-container {
-    @apply w-[375px] mt-12;
+    @apply w-[375px] mt-16;
     @apply overflow-y-auto;
-    height: calc(100% - 29px);
+    height: calc(100% - 170px);
 
     .list-item {
       @apply h-auto w-full mb-10;
       @apply flex flex-col;
 
       .address {
-        @apply font-normal text-base;
+        @apply font-normal text-base px-2;
       }
 
       .time {
-        @apply font-normal text-sm text-gray3d;
+        @apply font-normal text-sm text-gray3d px-2;
       }
 
       .name {
-        @apply font-normal text-xl mt-2;
+        @apply font-normal text-xl mt-2 px-2;
       }
 
       .price {
-        @apply font-semibold text-2xl mt-2;
+        @apply font-semibold text-2xl mt-2 px-2;
       }
 
       .description {
-        @apply font-normal text-sm text-gray3d mt-2;
+        @apply font-normal text-sm text-gray3d mt-2 px-2;
       }
 
       .cover-container {
@@ -60,7 +60,7 @@ body {
         }
       }
       .panel {
-        @apply w-full flex flex-row justify-between p-0 items-center mt-4;
+        @apply w-full flex flex-row justify-between p-0 items-center mt-4 px-2;
 
         button {
           @apply bg-red-400 font-semibold text-white text-lg py-1;
@@ -74,6 +74,85 @@ body {
     }
   }
 
+  .mine-container {
+    @apply w-[375px] mt-16;
+    height: calc(100% - 170px);
+
+    .item-container {
+      @apply w-[375px] h-full p-2;
+      @apply overflow-y-auto;
+      .my-list-item {
+        @apply h-auto w-full mb-10;
+        @apply flex flex-col;
+
+        .date {
+          @apply ml-2;
+        }
+
+        .item-container {
+          @apply flex flex-row gap-2;
+
+          .info {
+            @apply flex flex-col gap-2;
+            .name {
+              @apply font-medium text-xl mt-2;
+            }
+
+            .token {
+              @apply font-normal text-sm text-gray3d mt-2;
+            }
+          }
+
+          .cover-container {
+            @apply mt-2 text-center;
+
+            .cover {
+              @apply w-40 h-20 bg-red-600 object-cover;
+            }
+          }
+        }
+
+        .ticket-container {
+          @apply flex flex-row gap-2 justify-between;
+
+          .info {
+            @apply flex flex-col gap-2 text-right w-full;
+            .name {
+              @apply font-medium text-xl mt-2;
+            }
+
+            .token {
+              @apply font-normal text-sm text-gray3d mt-2;
+            }
+          }
+
+          .cover-container {
+            @apply mt-2 text-center w-full;
+
+            .cover {
+              @apply w-40 h-20 bg-red-600 object-cover;
+            }
+          }
+        }
+      }
+    }
+
+    .selector {
+      @apply w-full h-16 items-center flex z-50;
+
+      .selector-item {
+        @apply mx-2 underline-offset-8;
+      }
+
+      .hasUnderline {
+        @apply underline;
+      }
+    }
+    .line {
+      @apply h-[1px] w-full bg-black/50 relative top-12 z-0;
+    }
+  }
+
   .footer {
     @apply absolute;
     @apply bottom-0 left-0 w-screen h-20;
@@ -81,7 +160,7 @@ body {
     @apply flex flex-row justify-between;
 
     .tab {
-      @apply flex flex-col items-center py-2 px-4 h-full w-full;
+      @apply flex flex-col items-center py-2 px-4 h-full w-full cursor-pointer;
 
       .tab-icon {
         @apply w-10 h-10;
