@@ -1,5 +1,11 @@
-import { useQuery } from "@apollo/client";
-import { parseEther } from "@ethersproject/units";
+/*
+ * @Author: pony@diynova.com
+ * @Date: 2022-05-26 14:21:34
+ * @LastEditors: pony@diynova.com
+ * @LastEditTime: 2022-05-26 14:30:51
+ * @FilePath: /secure-movie/src/components/movie/movieList.tsx
+ * @Description: 
+ */
 import { useWeb3React } from "@web3-react/core";
 import { POLLING_INTERVAL } from "../../constant/connectors";
 import {
@@ -85,8 +91,8 @@ export default function MovieList() {
 
   return (
     <div className="movie-container">
-      {list.map((item) => {
-        return <MovieListItem item={item} />;
+      {list.map((item, indexed) => {
+        return <MovieListItem key={indexed} item={item} />;
       })}
     </div>
   );
