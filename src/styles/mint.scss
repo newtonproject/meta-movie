@@ -1,0 +1,77 @@
+body {
+    @apply bg-white;
+  }
+  
+  .mint {
+    @apply h-screen overflow-hidden;
+    @apply flex flex-col items-center;
+    @apply static;
+  
+    .content {
+      @apply w-[375px] h-full;
+      @apply relative;
+
+      .back {
+        @apply m-4 relative h-6 w-6;
+      }
+
+      .cover-container {
+        @apply relative px-4;
+
+        .cover {
+          @apply w-full aspect-video object-cover;
+        }
+
+        .preview {
+          @apply rounded-2xl w-16 h-16 absolute;
+          @apply text-white bg-black/50;
+          left: calc(50% - 32px);
+          bottom: calc(50% - 32px);
+        }
+      }
+
+      .title {
+        @apply w-full px-4 mt-4;
+        @apply text-gray333 font-bold text-xl;
+      }
+
+      .space {
+        @apply w-full h-4;
+      }
+
+      .transfer-info {
+          @apply w-full flex flex-row justify-between px-4 mt-4;
+
+          .left {
+            @apply text-gray999 text-base;
+          }
+
+          .right {
+            @apply text-gray666 text-base;
+          }
+      }
+    }
+
+    .panel {
+        @apply absolute;
+        @apply bottom-0 left-0 w-screen p-4;
+        @apply bg-white;
+        @apply flex flex-row justify-between;
+    
+        .info {
+            @apply flex flex-col h-auto origin-left;
+
+            .total {
+                @apply text-base text-gray999 text-left w-full;
+            }
+
+            .amount {
+                @apply text-xl font-bold text-gray333;
+            }
+        }
+
+        button {
+            @apply bg-reded font-normal text-white text-lg py-1 rounded-md w-32 h-auto;
+        }
+      }
+}

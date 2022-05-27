@@ -24,6 +24,7 @@ import {
 } from "../../utils/NewChainUtils";
 import Auction from "../../components/auction";
 import transactor from "../../components/transactor";
+import Link from "next/link";
 
 export default function MovieList() {
   const { library } = useWeb3React();
@@ -80,7 +81,10 @@ export default function MovieList() {
         <span className="price">{item.price}</span>
         <span className="description">{item.description}</span>
         <div className="panel">
-          <button>Mint</button>
+          <Link href="mint" passHref>
+            <button>Mint</button>
+          </Link>
+          
           <div className="panel-info">
             <span className="bold">10 times</span>
             <span className="normal">Remaining Mints</span>

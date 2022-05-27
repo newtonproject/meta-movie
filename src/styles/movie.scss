@@ -56,7 +56,7 @@ body {
         @apply mt-6 relative;
 
         .cover {
-          @apply w-full aspect-video bg-red-600 object-cover;
+          @apply w-full aspect-video object-cover;
         }
 
         .preview {

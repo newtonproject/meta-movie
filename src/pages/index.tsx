@@ -16,10 +16,9 @@ import MovieCreate from "../components/movie/movieCreate";
 
 export default function Home() {
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
       <div className={"container"}>
         <MovieHome />
+        
       </div>
-    </Web3ReactProvider>
   );
 }
