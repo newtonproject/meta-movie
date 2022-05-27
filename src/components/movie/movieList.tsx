@@ -4,7 +4,7 @@
  * @LastEditors: pony@diynova.com
  * @LastEditTime: 2022-05-26 14:30:51
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
- * @Description: 
+ * @Description:
  */
 import { useWeb3React } from "@web3-react/core";
 import { POLLING_INTERVAL } from "../../constant/connectors";

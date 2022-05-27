@@ -47,13 +47,12 @@ export default function MovieHome() {
         </div>
         <div className="tab">
           <Link href="create" passHref>
-          <img
-            className="tab-center"
-            src="/assets/image/add.png"
-            alt="water"
-          />
+            <img
+              className="tab-center"
+              src="/assets/image/add.png"
+              alt="water"
+            />
           </Link>
-          
         </div>
         <div
           className="tab"

@@ -19,8 +19,7 @@ export default function Home() {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <div className={"container"}>
-      <MovieHome />
-        
+        <MovieHome />
       </div>
     </Web3ReactProvider>
   );
