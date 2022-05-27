@@ -6,14 +6,14 @@
   }
 }
 
-#cunnected {
+#connected {
   @apply relative;
-  .cunnected-title {
+  .connected-title {
     button {
       @apply w-44 h-10 leading-10 text-center ml-4 border-solid border-greenbg border;
     }
   }
-  .cunnected-content {
+  .connected-content {
     @apply bg-white absolute top-12 right-0 py-5 px-4;
     box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.3019607961177826);
     button {
@@ -26,7 +26,7 @@
       @apply w-28 h-auto;
     }
   }
-  .cunnectend-account {
+  .connected-account {
     button {
       @apply flex items-center justify-center;
     }

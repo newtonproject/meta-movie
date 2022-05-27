@@ -2,15 +2,15 @@ import { useQuery } from "@apollo/client";
 import { parseEther } from "@ethersproject/units";
 import { useWeb3React } from "@web3-react/core";
 // import { POLLING_INTERVAL } from "constant/connectors";
-import useBlock from "hooks/useBlock";
-import { useFlowerContract } from "hooks/useContract";
+import useBlock from "../../hooks/useBlock";
+import { useFlowerContract } from "../../hooks/useContract";
 import React, { useRef, useState } from "react";
 import {
   getBlockUrl,
   hexAddress2NewAddress,
   shortAddress,
-} from "utils/NewChainUtils";
-import transactor from "components/transactor";
+} from "../../utils/NewChainUtils";
+import transactor from "../../components/transactor";
 
 export default function MovieMine() {
   const { library } = useWeb3React();
@@ -19,7 +19,7 @@ export default function MovieMine() {
   const item1 = {
     address: "NEW5154...wdWM",
     time: "1 hour ago",
-    name: "Free Guy",
+    name: "The Matrix Resurrections",
     cover: "/assets/image/cover1.png",
     price: "2,000,000 NEW",
     description:
@@ -67,7 +67,7 @@ export default function MovieMine() {
               </div>
               <div className="info">
                 <span className="name">{item.name}</span>
-                <span className="tokenID">Token id: {item.token}</span>
+                <span className="token">Token id: {item.token}</span>
               </div>
             </div>
           );
@@ -86,12 +86,13 @@ export default function MovieMine() {
             <div className="ticket-container">
               <div className="info">
                 <span className="name">{item.name}</span>
-                <span className="tokenID">Token id: {item.token}</span>
+                <span className="token">Token id: {item.token}</span>
+                <span className="token">Expiration time: {item.time}</span>
               </div>
               <div className="cover-container">
                 <img
                   className="cover"
-                  src={item.cover}
+                  src="/assets/image/ticket.png"
                   alt="cover"
                   onClick={() => {}}
                 />
@@ -109,23 +110,23 @@ export default function MovieMine() {
       <div className="selector">
         <button
           className={
-            tabSelected == 0 ? "selector-item hasUnderline" : "selector-item"
+            tabSelected == 0 ? "selector-item select" : "selector-item unselect"
           }
           onClick={() => {
             setTabSelected(0);
           }}
         >
-          我的创作
+          My Creation
         </button>
         <button
           className={
-            tabSelected == 1 ? "selector-item hasUnderline" : "selector-item"
+            tabSelected == 1 ? "selector-item select" : "selector-item unselect"
           }
           onClick={() => {
             setTabSelected(1);
           }}
         >
-          我的观影票EVT
+          My Movie Ticket
         </button>
       </div>
       <div className="item-container">

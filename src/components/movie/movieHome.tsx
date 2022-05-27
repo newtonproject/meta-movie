@@ -20,7 +20,6 @@ import Auction from "../../components/auction";
 import transactor from "../../components/transactor";
 import MovieList from "./movieList";
 import MovieMine from "./movieMine";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Link from "next/link";
 
 export default function MovieHome() {
@@ -42,18 +41,13 @@ export default function MovieHome() {
             setTabSelected(0);
           }}
         >
-          <img className="tab-icon" src="/assets/image/water.png" alt="water" />
+          <img className="tab-icon" src="/assets/image/home.png" alt="home" />
           <span>Home</span>
         </div>
         <div className="tab">
           <Link href="create" passHref>
-          <img
-            className="tab-center"
-            src="/assets/image/add.png"
-            alt="water"
-          />
+            <img className="tab-center" src="/assets/image/add.png" alt="add" />
           </Link>
-          
         </div>
         <div
           className="tab"
@@ -61,7 +55,7 @@ export default function MovieHome() {
             setTabSelected(1);
           }}
         >
-          <img className="tab-icon" src="/assets/image/love.png" alt="water" />
+          <img className="tab-icon" src="/assets/image/mine.png" alt="mine" />
           <span>Mine</span>
         </div>
       </div>

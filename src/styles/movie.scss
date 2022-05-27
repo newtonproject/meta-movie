@@ -9,7 +9,7 @@ body {
   //   @apply bg-red-500;
 
   .content {
-    @apply w-[375px] h-[700px];
+    @apply w-[375px] h-full;
     @apply relative;
 
     .wallet {
@@ -21,54 +21,67 @@ body {
   .movie-container {
     @apply w-[375px] mt-16;
     @apply overflow-y-auto;
-    height: calc(100% - 170px);
+    height: calc(100% - 140px);
 
     .list-item {
-      @apply h-auto w-full mb-10;
+      @apply h-auto w-full mb-14;
       @apply flex flex-col;
 
-      .address {
-        @apply font-normal text-base px-2;
-      }
-
       .time {
-        @apply font-normal text-sm text-gray3d px-2;
+        @apply font-normal text-xs text-gray999 px-2 mt-4;
       }
 
       .name {
-        @apply font-normal text-xl mt-2 px-2;
+        @apply font-bold text-2xl mt-2 px-2;
       }
 
       .price {
-        @apply font-semibold text-2xl mt-2 px-2;
+        @apply font-semibold text-2xl px-2 mt-4;
       }
 
       .description {
-        @apply font-normal text-sm text-gray3d mt-2 px-2;
+        @apply font-normal text-sm text-black33 mt-4 px-2;
+      }
+      .user {
+        @apply flex items-center mt-2 ml-2;
+        .user-icon {
+          @apply w-5 h-5;
+        }
+        .address {
+          @apply font-normal text-sm px-2 text-gray999;
+        }
       }
 
       .cover-container {
-        @apply mt-2 text-center;
+        @apply mt-6 relative;
 
         .cover {
-          @apply w-full h-40 bg-red-600 object-cover;
+          @apply w-full aspect-video bg-red-600 object-cover;
         }
 
         .preview {
-          @apply rounded-2xl w-28 h-8 relative bottom-24;
+          @apply rounded-2xl w-28 h-8 absolute bottom-24;
           @apply text-white bg-black/50;
+          left: calc(50% - 3.5rem);
         }
       }
       .panel {
         @apply w-full flex flex-row justify-between p-0 items-center mt-4 px-2;
 
         button {
-          @apply bg-red-400 font-semibold text-white text-lg py-1;
-          width: calc(100% - 200px);
+          @apply bg-reded font-bold text-white text-xl py-1 rounded-md;
+          width: calc(100% - 160px);
         }
 
-        span {
-          @apply font-normal text-base text-gray666;
+        .panel-info {
+          @apply flex flex-col text-right;
+
+          .normal {
+            @apply font-normal text-xs text-gray999;
+          }
+          .bold {
+            @apply font-bold text-base text-gray999;
+          }
         }
       }
     }
@@ -76,61 +89,61 @@ body {
 
   .mine-container {
     @apply w-[375px] mt-16;
-    height: calc(100% - 170px);
+    height: calc(100% - 140px);
 
     .item-container {
-      @apply w-[375px] h-full p-2;
+      @apply w-[375px] h-full;
       @apply overflow-y-auto;
       .my-list-item {
-        @apply h-auto w-full mb-10;
+        @apply h-auto w-full mb-10 px-2;
         @apply flex flex-col;
 
         .date {
-          @apply ml-2;
+          @apply text-gray999 text-sm;
         }
 
         .item-container {
-          @apply flex flex-row gap-2;
+          @apply flex flex-row mt-4;
 
           .info {
-            @apply flex flex-col gap-2;
+            @apply flex flex-col w-full px-2 justify-between;
             .name {
-              @apply font-medium text-xl mt-2;
+              @apply font-normal text-lg text-gray333 leading-5;
             }
 
             .token {
-              @apply font-normal text-sm text-gray3d mt-2;
+              @apply font-normal text-sm text-gray999;
             }
           }
 
           .cover-container {
-            @apply mt-2 text-center;
+            @apply text-center;
 
             .cover {
-              @apply w-40 h-20 bg-red-600 object-cover;
+              @apply w-40 aspect-video object-cover;
             }
           }
         }
 
         .ticket-container {
-          @apply flex flex-row gap-2 justify-between;
+          @apply flex flex-row gap-2 justify-between py-2;
 
           .info {
-            @apply flex flex-col gap-2 text-right w-full;
+            @apply flex flex-col gap-2 text-left w-full;
             .name {
-              @apply font-medium text-xl mt-2;
+              @apply font-normal text-lg text-gray333;
             }
 
             .token {
-              @apply font-normal text-sm text-gray3d mt-2;
+              @apply font-normal text-xs text-gray999 leading-3;
             }
           }
 
           .cover-container {
-            @apply mt-2 text-center w-full;
+            @apply text-center h-full  w-52;
 
             .cover {
-              @apply w-40 h-20 bg-red-600 object-cover;
+              @apply w-[124px] h-auto object-cover;
             }
           }
         }
@@ -141,21 +154,25 @@ body {
       @apply w-full h-16 items-center flex z-50;
 
       .selector-item {
-        @apply mx-2 underline-offset-8;
+        @apply mx-2 underline-offset-8 text-sm text-gray333;
       }
 
-      .hasUnderline {
-        @apply underline;
+      .unselect {
+        @apply font-normal;
+      }
+
+      .select {
+        @apply underline decoration-2 font-bold;
       }
     }
     .line {
-      @apply h-[1px] w-full bg-black/50 relative top-12 z-0;
+      @apply h-[1px] w-full bg-grayde relative top-12 z-0;
     }
   }
 
   .footer {
     @apply absolute;
-    @apply bottom-0 left-0 w-screen h-20;
+    @apply bottom-0 left-0 w-screen;
     @apply bg-white;
     @apply flex flex-row justify-between;
 
@@ -163,13 +180,13 @@ body {
       @apply flex flex-col items-center py-2 px-4 h-full w-full cursor-pointer;
 
       .tab-icon {
-        @apply w-10 h-10;
+        @apply w-7 h-7;
       }
       .tab-center {
-        @apply w-14 h-14 m-2;
+        @apply w-12 h-12 m-0;
       }
       span {
-        @apply text-center bg-white;
+        @apply text-center bg-white text-xs;
       }
     }
   }

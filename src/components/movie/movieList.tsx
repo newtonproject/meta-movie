@@ -4,7 +4,7 @@
  * @LastEditors: pony@diynova.com
  * @LastEditTime: 2022-05-26 14:30:51
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
- * @Description: 
+ * @Description:
  */
 import { useWeb3React } from "@web3-react/core";
 import { POLLING_INTERVAL } from "../../constant/connectors";
@@ -30,7 +30,7 @@ export default function MovieList() {
 
   const item1 = {
     address: "NEW5154...wdWM",
-    time: "1 hour ago",
+    time: "24 hours",
     name: "Free Guy",
     cover: "/assets/image/cover1.png",
     price: "2,000,000 NEW",
@@ -40,7 +40,7 @@ export default function MovieList() {
 
   const item2 = {
     address: "NEW5154...wdWM",
-    time: "1 hour ago",
+    time: "24 hours",
     name: "Free Guy",
     cover: "/assets/image/cover2.png",
     price: "2,000,000 NEW",
@@ -67,8 +67,6 @@ export default function MovieList() {
     const { item } = props;
     return (
       <div className="list-item" key={item.name}>
-        <span className="address">{item.address}</span>
-        <span className="time">{item.time}</span>
         <span className="name">{item.name}</span>
         <div className="cover-container">
           <img
@@ -82,8 +80,16 @@ export default function MovieList() {
         <span className="price">{item.price}</span>
         <span className="description">{item.description}</span>
         <div className="panel">
-          <button>Buy</button>
-          <span className="">剩余购买次数10次</span>
+          <button>Mint</button>
+          <div className="panel-info">
+            <span className="bold">10 times</span>
+            <span className="normal">Remaining Mints</span>
+          </div>
+        </div>
+        <span className="time">Valid time after purchase: {item.time}</span>
+        <div className="user">
+          <img className="user-icon" src="/assets/image/user.png" alt="user" />
+          <span className="address">{item.address}</span>
         </div>
       </div>
     );
