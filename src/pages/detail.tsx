@@ -44,10 +44,12 @@ export const VideoJS = (props) => {
   return (
     <div className="video-container">
       <div data-vjs-player>
-        <video ref={videoRef} className="video-js vjs-big-play-centered video" />
+        <video
+          ref={videoRef}
+          className="video-js vjs-big-play-centered video"
+        />
       </div>
     </div>
-    
   );
 };
 
@@ -100,48 +102,48 @@ export default function MovieDetail(props) {
 
   return (
     <div className="detail-container">
- <div className="detail">
-      <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
-      <div className="information">
-        <div className="desc">
-          <div className="title">Description</div>
-          <div className="content">
-            Here is the video Description Google Translate is a service for
-            translating texts and web pages started by Google in 2006.
-          </div>
-        </div>
-        <div className="chain">
-          <div className="title">Detail</div>
-          <div className="content">
-            <div className="item">
-              <div>contract address</div>
-              <div>NEW182XXX</div>
-            </div>
-            <div className="item">
-              <div>TokenId</div>
-              <div>123</div>
-            </div>
-            <div className="item">
-              <div>TokenId</div>
-              <div>123</div>
-            </div>
-            <div className="item">
-              <div>TokenStandard</div>
-              <div>EVT</div>
-            </div>
-            <div className="item">
-              <div>BlockChaiin</div>
-              <div>Newton</div>
+      <div className="detail">
+        <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+        <div className="information">
+          <div className="desc">
+            <div className="title">Description</div>
+            <div className="content">
+              Here is the video Description Google Translate is a service for
+              translating texts and web pages started by Google in 2006.
             </div>
           </div>
-        </div>
+          <div className="chain">
+            <div className="title">Detail</div>
+            <div className="content">
+              <div className="item">
+                <div>contract address</div>
+                <div>NEW182XXX</div>
+              </div>
+              <div className="item">
+                <div>TokenId</div>
+                <div>123</div>
+              </div>
+              <div className="item">
+                <div>TokenId</div>
+                <div>123</div>
+              </div>
+              <div className="item">
+                <div>TokenStandard</div>
+                <div>EVT</div>
+              </div>
+              <div className="item">
+                <div>BlockChaiin</div>
+                <div>Newton</div>
+              </div>
+            </div>
+          </div>
 
-        <div className="extra">
-          <div className="title">FailureTime</div>
-          <div className="content">23/5/2022 23:00</div>
+          <div className="extra">
+            <div className="title">FailureTime</div>
+            <div className="content">23/5/2022 23:00</div>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
