@@ -16,9 +16,8 @@ import MovieCreate from "../components/movie/movieCreate";
 
 export default function Home() {
   return (
-      <div className={"container"}>
-        <MovieHome />
-        
-      </div>
+    <div className={"container"}>
+      <MovieHome />
+    </div>
   );
 }

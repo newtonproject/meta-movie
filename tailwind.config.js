@@ -31,7 +31,8 @@ module.exports = {
         grag1e: '#1ED663 ',
         greenbg: '#405e27',
         reded: '#ED1B24',
-        black33: "333333"
+        black33: "333333",
+        grayc4: "C4C4C4"
       },
       backgroundImage: {
         'nextbg': "url('/assets/image/next.png')",
