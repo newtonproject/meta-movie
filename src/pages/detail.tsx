@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-27 14:29:53
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 16:06:22
+ * @LastEditTime: 2022-05-28 16:25:49
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -42,9 +42,12 @@ export const VideoJS = (props) => {
   }, [playerRef]);
 
   return (
-    <div data-vjs-player>
-      <video ref={videoRef} className="video-js vjs-big-play-centered" />
+    <div className="video-container">
+      <div data-vjs-player>
+        <video ref={videoRef} className="video-js vjs-big-play-centered video" />
+      </div>
     </div>
+    
   );
 };
 
@@ -96,7 +99,8 @@ export default function MovieDetail(props) {
   };
 
   return (
-    <div className="detail">
+    <div className="detail-container">
+ <div className="detail">
       <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
       <div className="information">
         <div className="desc">
@@ -137,6 +141,7 @@ export default function MovieDetail(props) {
           <div className="content">23/5/2022 23:00</div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

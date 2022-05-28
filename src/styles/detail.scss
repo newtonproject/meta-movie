@@ -1,5 +1,11 @@
+.detail-container {
+  @apply flex flex-row items-center justify-center;
+
+
 .detail {
+  @apply max-w-screen-md;
   @apply flex flex-col;
+
 
   .information {
     @apply flex flex-col;
@@ -51,4 +57,5 @@
       }
     }
   }
+}
 }
