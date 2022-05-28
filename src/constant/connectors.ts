@@ -2,8 +2,8 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-17 11:01:01
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-18 14:06:40
- * @FilePath: /cryptofamily-website/src/pages/constant/connectors.ts
+ * @LastEditTime: 2022-05-28 14:22:08
+ * @FilePath: /secure-movie/src/constant/connectors.ts
  * @Description:
  */
 import { InjectedConnector } from "@web3-react/injected-connector";
@@ -36,5 +36,4 @@ export const network = new NetworkConnector({
 export const walletconnect = new WalletConnectConnector({
   rpc: { 1: RPC_URLS[1] },
   qrcode: true,
-  pollingInterval: POLLING_INTERVAL,
 });

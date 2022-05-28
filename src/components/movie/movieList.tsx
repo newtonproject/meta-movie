@@ -84,7 +84,7 @@ export default function MovieList() {
           <Link href="mint" passHref>
             <button>Mint</button>
           </Link>
-          
+
           <div className="panel-info">
             <span className="bold">10 times</span>
             <span className="normal">Remaining Mints</span>
