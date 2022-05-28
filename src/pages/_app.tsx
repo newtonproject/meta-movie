@@ -2,12 +2,12 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 16:41:40
+ * @LastEditTime: 2022-05-28 18:08:16
  * @FilePath: /secure-movie/src/pages/_app.tsx
  * @Description:
  */
 import { ApolloProvider } from "@apollo/client";
-import client from "services";
+import client from "services/graph";
 import Head from "next/head";
 import "../styles/globals.scss";
 import { Web3ReactProvider } from "@web3-react/core";

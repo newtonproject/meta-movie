@@ -2,32 +2,18 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-26 14:30:51
+ * @LastEditTime: 2022-05-28 22:23:59
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
  * @Description:
  */
 import { useWeb3React } from "@web3-react/core";
-import { POLLING_INTERVAL } from "../../constant/connectors";
-import {
-  NEXT_PUBLIC_FLOWER_CONTRACT_ADDRESS,
-  TARGET_CHAINID,
-} from "../../constant/settings";
-import useBlock from "../../hooks/useBlock";
-import { useFlowerContract } from "../../hooks/useContract";
-import { FlowerList, Memory, Property } from "../../model/flower";
-import React, { useRef, useState } from "react";
-import { NFT_FLOWER } from "../../services/queryMemory";
-import {
-  getBlockUrl,
-  hexAddress2NewAddress,
-  shortAddress,
-} from "../../utils/NewChainUtils";
-import Auction from "../../components/auction";
-import transactor from "../../components/transactor";
+import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function MovieList() {
   const { library } = useWeb3React();
+  const router = useRouter();
 
   const item1 = {
     address: "NEW5154...wdWM",
@@ -64,6 +50,25 @@ export default function MovieList() {
     item2,
   ];
 
+  function openMovieDetail() {
+    const props = {
+      name: "Ready Player One",
+      description:
+        "Ready Player One is a 2018 American science fiction adventure film based on Ernest Cline's novel of the same name. Directed by Steven Spielberg, from a screenplay by Zak Penn and Cline, it stars Tye Sheridan, Olivia Cooke..",
+      contractAddress: "NEW182XXXXX",
+      tokenId: "1",
+      tokenStandard: "EVT",
+      failureTime: "2020 12 31",
+      videoUrl:
+        "http://127.0.0.1:8081/ipfs/QmYTXR42voo8orAnnhC4cuPor75QxjHd2X6e4L7QwToTQ5/output.m3u8",
+      videoSecret: "d2e8b0d37ad163aec25cad21a6d1202a",
+    };
+    router.push({
+      pathname: "/detail",
+      query: props,
+    });
+  }
+
   function MovieListItem(props) {
     const { item } = props;
     return (
@@ -74,14 +79,16 @@ export default function MovieList() {
             className="cover"
             src={item.cover}
             alt="cover"
-            onClick={() => {}}
+            onClick={() => {
+              openMovieDetail();
+            }}
           />
           <button className="preview">Preview</button>
         </div>
         <span className="price">{item.price}</span>
         <span className="description">{item.description}</span>
         <div className="panel">
-          <Link href="mint" passHref>
+          <Link href="/mint" passHref>
             <button>Mint</button>
           </Link>
 
