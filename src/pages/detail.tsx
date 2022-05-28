@@ -2,23 +2,25 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-27 14:29:53
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 16:25:49
+ * @LastEditTime: 2022-05-28 17:25:22
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
 import { useEffect, useRef } from "react";
 
-export const VideoJS = (props) => {
+export const VideoComponent = (props) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const { options, onReady } = props;
 
   useEffect(() => {
     // Make sure Video.js player is only initialized once
+    let player;
     if (!playerRef.current) {
       const videoElement = videoRef.current;
       if (!videoElement) return;
-      const player = (playerRef.current = videojs(videoElement, options, () => {
+      // @ts-ignore
+      player = (playerRef.current = videojs(videoElement, options, () => {
         player.log("player is ready");
         onReady && onReady(player);
       }));
@@ -103,7 +105,7 @@ export default function MovieDetail(props) {
   return (
     <div className="detail-container">
       <div className="detail">
-        <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+        <VideoComponent options={videoJsOptions} onReady={handlePlayerReady} />
         <div className="information">
           <div className="desc">
             <div className="title">Description</div>
