@@ -1,0 +1,82 @@
+.create {
+  @apply h-screen overflow-hidden;
+  @apply flex flex-col items-center;
+  @apply static;
+
+  .content {
+    @apply w-[375px] h-full overflow-y-auto;
+    @apply relative;
+
+    .back {
+      @apply m-4 relative h-6 w-6;
+    }
+
+    .cover-container {
+      @apply relative px-4;
+
+      .cover {
+        @apply w-full aspect-video object-cover;
+      }
+
+      .preview {
+        @apply w-[343px] h-8 absolute bottom-0;
+        @apply text-white bg-black/50;
+        @apply text-[18px] font-normal;
+      }
+    }
+
+    .title {
+      @apply w-full px-4 mt-4;
+      @apply text-gray333 font-normal text-[18px];
+    }
+
+    .content {
+      @apply w-full px-4 mt-2 h-auto;
+      @apply text-gray999 font-normal text-sm;
+    }
+
+    .input {
+      @apply text-[18px] mx-4 mt-2;
+      @apply border-grayc4 border;
+
+      .normal-input {
+        @apply w-full px-4 py-3;
+        @apply focus:outline-none;
+      }
+      .multi-input {
+        @apply w-full px-4 py-3 h-32;
+        @apply focus:outline-none outline-none;
+      }
+    }
+
+    .select-trailor {
+      @apply w-auto p-2 mt-2 ml-4;
+      @apply border border-gray999 rounded-md;
+      @apply text-sm;
+    }
+
+    .unit {
+      @apply flex items-center;
+    }
+
+    .new {
+      @apply px-2;
+    }
+
+    .confirm {
+      @apply w-[343px] mt-16 mx-4 py-3 bg-reded rounded-md text-white mb-12;
+    }
+
+    .trailor {
+      @apply ml-4 w-[72px] h-[72px] mt-2;
+
+      .trailor-cover {
+        @apply w-16 h-16 relative top-2;
+      }
+
+      .close {
+        @apply w-4 h-4 relative bottom-16 left-14;
+      }
+    }
+  }
+}

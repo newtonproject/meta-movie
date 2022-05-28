@@ -18,9 +18,6 @@ import {
 } from "../../utils/NewChainUtils";
 import Auction from "../../components/auction";
 import transactor from "../../components/transactor";
-import MovieList from "./movieList";
-import MovieMine from "./movieMine";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Link from "next/link";
 
 export default function MovieMint() {

@@ -18,49 +18,57 @@ import {
 } from "../../utils/NewChainUtils";
 import Auction from "../../components/auction";
 import transactor from "../../components/transactor";
-import MovieList from "./movieList";
-import MovieMine from "./movieMine";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Link from "next/link";
 
 export default function MovieCreate() {
   const { library } = useWeb3React();
-  const [tabSelected, setTabSelected] = useState(0);
 
   return (
-    <div className="movie">
+    <div className="create">
       <div className="content">
-        <div className="wallet">
-          <Auction />
-        </div>
-        {tabSelected == 0 ? <MovieList></MovieList> : <MovieMine></MovieMine>}
-      </div>
-      <div className="footer">
-        <div
-          className="tab"
-          onClick={() => {
-            setTabSelected(0);
-          }}
-        >
-          <img className="tab-icon" src="/assets/image/water.png" alt="water" />
-          <span>Home</span>
-        </div>
-        <div className="tab">
+        <Link href="/" passHref>
+          <img className="back" src="/assets/image/back.png" alt="back" />
+        </Link>
+        <div className="cover-container">
           <img
-            className="tab-center"
-            src="/assets/image/add.png"
-            alt="water"
+            className="cover"
+            src="/assets/image/cover1.png"
+            alt="cover"
             onClick={() => {}}
           />
+          <button className="preview">Change Cover</button>
         </div>
-        <div
-          className="tab"
-          onClick={() => {
-            setTabSelected(1);
-          }}
-        >
-          <img className="tab-icon" src="/assets/image/love.png" alt="water" />
-          <span>Mine</span>
+        <div className="title">Name</div>
+        <div className="input">
+          <input className="normal-input" placeholder="The video's name" />
         </div>
+        <div className="title">Description</div>
+        <div className="input">
+          <textarea
+            className="multi-input"
+            placeholder="The video's description"
+          />
+        </div>
+        <div className="title">Trailor</div>
+        <button className="select-trailor">+ Add Trailor</button>
+        <div className="trailor">
+          <img
+            className="trailor-cover"
+            src="/assets/image/cover1.png"
+            alt="cover"
+          />
+          <img className="close" src="/assets/image/close.png" alt="cover" />
+        </div>
+        <div className="title">Blockchain</div>
+        <div className="content">Newton</div>
+        <div className="title">Valid time</div>
+        <div className="content">24 hours</div>
+        <div className="title">Price</div>
+        <div className="input unit">
+          <input className="normal-input" placeholder="The video's price" />
+          <div className="new">NEW</div>
+        </div>
+        <button className="confirm">Confirm</button>
       </div>
     </div>
   );
