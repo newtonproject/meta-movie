@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 16:42:24
+ * @LastEditTime: 2022-05-28 21:50:11
  * @FilePath: /secure-movie/src/components/movie/movieHome.tsx
  * @Description:
  */
@@ -36,7 +36,7 @@ export default function MovieHome() {
           <span>Home</span>
         </div>
         <div className="tab">
-          <Link href="create" passHref>
+          <Link href="/create" passHref>
             <img className="tab-center" src="/assets/image/add.png" alt="add" />
           </Link>
         </div>

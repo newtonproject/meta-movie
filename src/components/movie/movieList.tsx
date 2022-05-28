@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 18:41:12
+ * @LastEditTime: 2022-05-28 22:23:59
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
  * @Description:
  */
@@ -64,7 +64,7 @@ export default function MovieList() {
       videoSecret: "d2e8b0d37ad163aec25cad21a6d1202a",
     };
     router.push({
-      pathname: "detail",
+      pathname: "/detail",
       query: props,
     });
   }
@@ -88,7 +88,7 @@ export default function MovieList() {
         <span className="price">{item.price}</span>
         <span className="description">{item.description}</span>
         <div className="panel">
-          <Link href="mint" passHref>
+          <Link href="/mint" passHref>
             <button>Mint</button>
           </Link>
 
