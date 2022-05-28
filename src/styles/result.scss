@@ -1,0 +1,21 @@
+.result {
+  @apply h-screen overflow-hidden;
+  @apply flex flex-col items-center;
+  @apply static;
+
+  .content {
+    @apply w-[375px] h-full items-center flex flex-col;
+    .success {
+      @apply w-full h-auto mt-32 px-16;
+    }
+
+    .title {
+      @apply w-full text-gray333 font-bold text-center mt-6;
+    }
+
+    button {
+      @apply bg-reded font-bold text-white text-xl py-1 rounded-md mt-10;
+      width: calc(100% - 100px);
+    }
+  }
+}

@@ -59,8 +59,9 @@ export default function MovieMint() {
           <p className="total">Total</p>
           <div className="amount">20,000 NEW</div>
         </div>
-
-        <button>NEXT</button>
+        <Link href="result" passHref>
+          <button>NEXT</button>
+        </Link>
       </div>
     </div>
   );
