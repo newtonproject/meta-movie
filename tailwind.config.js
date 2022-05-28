@@ -1,3 +1,11 @@
+/*
+ * @Author: pony@diynova.com
+ * @Date: 2022-05-28 16:39:52
+ * @LastEditors: pony@diynova.com
+ * @LastEditTime: 2022-05-28 16:44:55
+ * @FilePath: /secure-movie/tailwind.config.js
+ * @Description: 
+ */
 module.exports = {
   mode: 'jit',
   constent: [
@@ -46,10 +54,8 @@ module.exports = {
   variants: {
     extend: {},
   },
-  corePlugins: {
-    aspectRatio: false,
-  },
+  
   plugins: [
-    require('@tailwindcss/aspect-ratio'),
+    
   ],
 }
