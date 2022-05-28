@@ -1,23 +1,14 @@
-import { useQuery } from "@apollo/client";
-import { parseEther } from "@ethersproject/units";
+/*
+ * @Author: pony@diynova.com
+ * @Date: 2022-05-28 16:39:52
+ * @LastEditors: pony@diynova.com
+ * @LastEditTime: 2022-05-28 16:42:24
+ * @FilePath: /secure-movie/src/components/movie/movieHome.tsx
+ * @Description:
+ */
 import { useWeb3React } from "@web3-react/core";
-import { POLLING_INTERVAL } from "../../constant/connectors";
-import {
-  NEXT_PUBLIC_FLOWER_CONTRACT_ADDRESS,
-  TARGET_CHAINID,
-} from "../../constant/settings";
-import useBlock from "../../hooks/useBlock";
-import { useFlowerContract } from "../../hooks/useContract";
-import { FlowerList, Memory, Property } from "../../model/flower";
-import React, { useRef, useState } from "react";
-import { NFT_FLOWER } from "../../services/queryMemory";
-import {
-  getBlockUrl,
-  hexAddress2NewAddress,
-  shortAddress,
-} from "../../utils/NewChainUtils";
+import React, { useState } from "react";
 import Auction from "../../components/auction";
-import transactor from "../../components/transactor";
 import MovieList from "./movieList";
 import MovieMine from "./movieMine";
 import Link from "next/link";
