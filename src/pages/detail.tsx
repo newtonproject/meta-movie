@@ -2,9 +2,9 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 18:08:26
+ * @LastEditTime: 2022-05-28 18:46:22
  * @FilePath: /secure-movie/src/pages/detail.tsx
- * @Description: 
+ * @Description:
  */
 
 import { useEffect, useRef } from "react";
@@ -21,10 +21,10 @@ export const VideoComponent = (props) => {
       const videoElement = videoRef.current;
       if (!videoElement) return;
       // @ts-ignore
-      player = (playerRef.current = videojs(videoElement, options, () => {
+      player = playerRef.current = videojs(videoElement, options, () => {
         player.log("player is ready");
         onReady && onReady(player);
-      }));
+      });
       // You can update player in the `else` block here, for example:
     } else {
       player.autoplay(options.autoplay);
@@ -55,12 +55,26 @@ export const VideoComponent = (props) => {
     </div>
   );
 };
+import { useRouter } from "next/router";
 
 export default function MovieDetail(props) {
+  const router = useRouter();
+
+  const {
+    name,
+    description,
+    contractAddress,
+    tokenId,
+    tokenStandard,
+    failureTime,
+    videoUrl,
+    videoSecret,
+  } = router.query;
+
   const playerRef = useRef(null);
 
   function encryptionCallback(key) {
-    var data = Buffer.from("d2e8b0d37ad163aec25cad21a6d1202a");
+    var data = Buffer.from(videoSecret.toString());
     var dataView = new DataView(data.buffer);
     const bytes = new Uint32Array([
       dataView.getUint32(0),
@@ -78,7 +92,7 @@ export default function MovieDetail(props) {
     fluid: true,
     sources: [
       {
-        src: "http://127.0.0.1:8081/ipfs/QmYTXR42voo8orAnnhC4cuPor75QxjHd2X6e4L7QwToTQ5/output.m3u8",
+        src: videoUrl,
         type: "application/x-mpegURL",
       },
     ],
@@ -110,29 +124,22 @@ export default function MovieDetail(props) {
         <div className="information">
           <div className="desc">
             <div className="title">Description</div>
-            <div className="content">
-              Here is the video Description Google Translate is a service for
-              translating texts and web pages started by Google in 2006.
-            </div>
+            <div className="content">{description}</div>
           </div>
           <div className="chain">
             <div className="title">Detail</div>
             <div className="content">
               <div className="item">
                 <div>contract address</div>
-                <div>NEW182XXX</div>
+                <div>{contractAddress}</div>
               </div>
               <div className="item">
                 <div>TokenId</div>
-                <div>123</div>
-              </div>
-              <div className="item">
-                <div>TokenId</div>
-                <div>123</div>
+                <div>{tokenId}</div>
               </div>
               <div className="item">
                 <div>TokenStandard</div>
-                <div>EVT</div>
+                <div>{tokenStandard}</div>
               </div>
               <div className="item">
                 <div>BlockChaiin</div>
@@ -143,7 +150,7 @@ export default function MovieDetail(props) {
 
           <div className="extra">
             <div className="title">FailureTime</div>
-            <div className="content">23/5/2022 23:00</div>
+            <div className="content">{failureTime}</div>
           </div>
         </div>
       </div>
