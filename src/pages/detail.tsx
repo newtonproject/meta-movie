@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-27 14:29:53
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 14:56:45
+ * @LastEditTime: 2022-05-28 16:06:22
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -52,7 +52,15 @@ export default function MovieDetail(props) {
   const playerRef = useRef(null);
 
   function encryptionCallback(key) {
-    return new Uint32Array([2911908225, 1042915255, 4112562800, 3204785626]);
+    var data = Buffer.from("d2e8b0d37ad163aec25cad21a6d1202a");
+    var dataView = new DataView(data.buffer);
+    const bytes = new Uint32Array([
+      dataView.getUint32(0),
+      dataView.getUint32(4),
+      dataView.getUint32(8),
+      dataView.getUint32(12),
+    ]);
+    return bytes;
   }
 
   const videoJsOptions = {
@@ -62,7 +70,7 @@ export default function MovieDetail(props) {
     fluid: true,
     sources: [
       {
-        src: "https://ipfs.devnet.andverse.org/ipfs/QmSsCP4wejRU44Qe4wxbpAtBnAqjxdPmWh5kAQMttHxtFr/output.m3u8",
+        src: "http://127.0.0.1:8081/ipfs/QmYTXR42voo8orAnnhC4cuPor75QxjHd2X6e4L7QwToTQ5/output.m3u8",
         type: "application/x-mpegURL",
       },
     ],
@@ -88,10 +96,47 @@ export default function MovieDetail(props) {
   };
 
   return (
-    <>
-      <div>Rest of app here</div>
+    <div className="detail">
       <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
-      <div>Rest of app here</div>
-    </>
+      <div className="information">
+        <div className="desc">
+          <div className="title">Description</div>
+          <div className="content">
+            Here is the video Description Google Translate is a service for
+            translating texts and web pages started by Google in 2006.
+          </div>
+        </div>
+        <div className="chain">
+          <div className="title">Detail</div>
+          <div className="content">
+            <div className="item">
+              <div>contract address</div>
+              <div>NEW182XXX</div>
+            </div>
+            <div className="item">
+              <div>TokenId</div>
+              <div>123</div>
+            </div>
+            <div className="item">
+              <div>TokenId</div>
+              <div>123</div>
+            </div>
+            <div className="item">
+              <div>TokenStandard</div>
+              <div>EVT</div>
+            </div>
+            <div className="item">
+              <div>BlockChaiin</div>
+              <div>Newton</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="extra">
+          <div className="title">FailureTime</div>
+          <div className="content">23/5/2022 23:00</div>
+        </div>
+      </div>
+    </div>
   );
 }
