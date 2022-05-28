@@ -1,11 +1,12 @@
 /*
  * @Author: pony@diynova.com
- * @Date: 2022-05-27 14:29:53
+ * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 17:25:22
+ * @LastEditTime: 2022-05-28 18:08:26
  * @FilePath: /secure-movie/src/pages/detail.tsx
- * @Description:
+ * @Description: 
  */
+
 import { useEffect, useRef } from "react";
 
 export const VideoComponent = (props) => {
