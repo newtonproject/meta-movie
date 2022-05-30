@@ -2,26 +2,45 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 21:50:11
+ * @LastEditTime: 2022-05-30 13:45:50
  * @FilePath: /secure-movie/src/components/movie/movieHome.tsx
  * @Description:
  */
 import { useWeb3React } from "@web3-react/core";
 import React, { useState } from "react";
-import Auction from "../../components/auction";
 import MovieList from "./movieList";
 import MovieMine from "./movieMine";
 import Link from "next/link";
+import { useSecureMovieContract } from "hooks/useContract";
+import { parseEther } from "@ethersproject/units";
+import transactor from "components/transactor";
+import Account from "../account";
 
 export default function MovieHome() {
   const { library } = useWeb3React();
   const [tabSelected, setTabSelected] = useState(0);
+  const secureMovieContract = useSecureMovieContract();
+
+  function buyTickets() {
+    const movieId = "";
+    const ticketAddress = "";
+    const amount = "";
+    const overrides = {
+      value: parseEther(amount),
+    };
+    const transaction = secureMovieContract.buyTickets(
+      movieId,
+      ticketAddress,
+      overrides
+    );
+    transactor(transaction, () => {});
+  }
 
   return (
     <div className="movie">
       <div className="content">
         <div className="wallet">
-          <Auction />
+          <Account />
         </div>
         {tabSelected == 0 ? <MovieList></MovieList> : <MovieMine></MovieMine>}
       </div>

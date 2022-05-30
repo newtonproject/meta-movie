@@ -36,14 +36,14 @@
 
       .preview {
         @apply w-[343px] h-8 absolute bottom-0;
-        @apply text-white bg-black/50;
-        @apply text-[18px] font-normal;
+        @apply text-white bg-zinc-900;
+        @apply text-xs font-normal;
       }
     }
 
     .title {
       @apply w-full px-4 mt-4;
-      @apply text-gray333 font-normal text-[18px];
+      @apply text-gray333 font-normal text-xs;
     }
 
     .content {
@@ -52,7 +52,7 @@
     }
 
     .input {
-      @apply text-[18px] mx-4 mt-2;
+      @apply text-xs mx-4 mt-2;
       @apply border-grayc4 border;
 
       .normal-input {

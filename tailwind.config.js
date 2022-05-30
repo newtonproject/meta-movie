@@ -2,13 +2,13 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 16:44:55
+ * @LastEditTime: 2022-05-30 13:59:10
  * @FilePath: /secure-movie/tailwind.config.js
  * @Description: 
  */
 module.exports = {
   mode: 'jit',
-  constent: [
+  content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}'
   ],

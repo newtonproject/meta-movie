@@ -8,6 +8,7 @@
 
 #connected {
   @apply relative;
+  @apply z-50;
   .connected-title {
     button {
       @apply w-44 h-10 leading-10 text-center ml-4 border-solid border-greenbg border;

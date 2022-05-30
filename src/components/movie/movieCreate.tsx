@@ -1,23 +1,9 @@
-import { useQuery } from "@apollo/client";
+import React, {useState} from "react";
+import Link from "next/link";
+import { useSecureMovieContract } from "hooks/useContract";
+import transactor from "components/transactor";
 import { parseEther } from "@ethersproject/units";
 import { useWeb3React } from "@web3-react/core";
-import { POLLING_INTERVAL } from "../../constant/connectors";
-import {
-  NEXT_PUBLIC_FLOWER_CONTRACT_ADDRESS,
-  TARGET_CHAINID,
-} from "../../constant/settings";
-import useBlock from "../../hooks/useBlock";
-import { useFlowerContract } from "../../hooks/useContract";
-import { FlowerList, Memory, Property } from "../../model/flower";
-import React, { useRef, useState } from "react";
-import {
-  getBlockUrl,
-  hexAddress2NewAddress,
-  shortAddress,
-} from "../../utils/NewChainUtils";
-import Auction from "../../components/auction";
-import transactor from "../../components/transactor";
-import Link from "next/link";
 import { message, Upload } from "antd";
 import { UriResolver } from "../../functions/UriResolver";
 
@@ -28,6 +14,11 @@ export default function MovieCreate() {
   const [tokenVideoIpfsHash, setTokenVideoIpfsHash] = useState("");
   const [tokenCoverIpfsHash, setTokenCoverIpfsHash] = useState("");
   const [tokenTrailorIpfsHash, setTokenTrailorIpfsHash] = useState("");
+
+  const { account } = useWeb3React();
+  const secureMovieContract = useSecureMovieContract();
+  console.log(`contract`);
+  console.log(secureMovieContract);
 
   const videoUploadProps = {
     name: "saveThisFileSafely",
@@ -84,32 +75,7 @@ export default function MovieCreate() {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
-  };
-
-  // const trailorUploadProps = {
-  //   name: 'saveThisFileSafely',
-  //   action: FILE_UPLOAD_URL,
-  //   showUploadList: false,
-  //   beforeUpload: file => {
-  //     const allowedType = ['video/mp4']
-  //     console.log(file.type);
-  //     if (allowedType.includes(file.type) === false) {
-  //       message.error(`${file.name} is not a valid file.`)
-  //     }
-  //     return allowedType.includes(file.type) ? true : Upload.LIST_IGNORE
-  //   },
-  //   onChange(info) {
-  //     if (info.file.status === 'done') {
-  //       const cid = info.file.response?.cid
-  //       console.log('image upload: ', cid)
-  //       setTokenTrailorIpfsHash(cid)
-  //       message.success(`${info.file.name} file uploaded successfully`)
-  //     } else if (info.file.status === 'error') {
-  //       console.log('upload server response:', info.file.response)
-  //       message.error(`${info.file.name} file upload failed.`)
-  //     }
-  //   }
-  // }
+  }
 
   const coverImagePreview =
     tokenCoverIpfsHash === "" ? (
@@ -121,6 +87,24 @@ export default function MovieCreate() {
         hidden={tokenCoverIpfsHash === ""}
       />
     );
+
+  function createSecureMovie() {
+    const toAddress = account;
+    const tokenUri = "https://www.newtonproject.org";
+    const pricePerTicket = parseEther("100");
+    const maxNumberOfTickets = 30; // max 30 ticket
+    const duration = 86400; // 24 hours
+    transactor(
+      secureMovieContract.createSecureMovieAndTickets(
+        toAddress,
+        tokenUri,
+        pricePerTicket,
+        maxNumberOfTickets,
+        duration
+      ),
+      () => {}
+    );
+  }
 
   return (
     <div className="create">
@@ -193,7 +177,9 @@ export default function MovieCreate() {
           <input className="normal-input" placeholder="The video's price" />
           <div className="new">NEW</div>
         </div>
-        <button className="confirm">Confirm</button>
+        <button className="confirm" onClick={() => createSecureMovie()}>
+          Confirm
+        </button>
       </div>
     </div>
   );
