@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 01:15:25
+ * @LastEditTime: 2022-05-31 01:18:19
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
  * @Description:
  */
@@ -91,6 +91,7 @@ export default function MovieList() {
       coverImage: tokenMetaData.tokenImage,
     };
 
+    // todo: has permission for buy ? view? owner?
     function buyTickets() {
       const movieId = movieToken.movieTokenId;
       console.log(parseEther(price));

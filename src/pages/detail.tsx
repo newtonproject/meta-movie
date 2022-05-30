@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 01:00:23
+ * @LastEditTime: 2022-05-31 01:32:53
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -50,7 +50,7 @@ export default function MovieDetail(props) {
 
   function check() {
     try {
-      let message = parseInt((Date.now() / 1000).toString()).toString();
+      let message = "timeStamp:" + parseInt((Date.now() / 1000).toString()).toString();
       let request = {
         jsonrpc: "2.0",
         id: 2,
