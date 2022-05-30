@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 00:48:16
+ * @LastEditTime: 2022-05-31 01:00:23
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -16,6 +16,7 @@ import { injected } from "constant/connectors";
 import Http from "services/http";
 import { CheckSecretParams } from "model";
 import { getSignatureDetail } from "utils";
+import { newAddress2HexAddress } from "utils/NewChainUtils";
 
 export default function MovieDetail(props) {
   const router = useRouter();
@@ -68,7 +69,8 @@ export default function MovieDetail(props) {
             const { r, s } = getSignatureDetail(response.result);
             const params = new CheckSecretParams();
             params.token_id = tokenId.toString();
-            params.contract_address = contractAddress.toString();
+            params.contract_address =
+              newAddress2HexAddress(contractAddress).toString();
             params.sign_message = message;
             params.sign_r = r;
             params.sign_s = s;
@@ -77,8 +79,12 @@ export default function MovieDetail(props) {
               .secretCheck(params)
               .then((res) => {
                 console.log(res);
-                setVideoSecret(res.result.secret);
-                setLocked(false);
+                if (res.error_code == 1) {
+                  setVideoSecret(res.result.secret);
+                  setLocked(false);
+                } else {
+                  alert(res.error_message);
+                }
               })
               .catch((error) => {
                 console.log(error);

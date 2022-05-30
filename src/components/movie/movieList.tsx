@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 00:41:35
+ * @LastEditTime: 2022-05-31 01:15:25
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
  * @Description:
  */
@@ -16,13 +16,18 @@ import { useQuery } from "@apollo/client";
 import { SecureMovieInfo, SMToken } from "entities/SMEntity";
 import { pageSize, POLLING_INTERVAL } from "constant";
 import { useTokenDescription } from "hooks/useTokenDescription";
-import { formatEther } from "@ethersproject/units";
+import { formatEther, parseEther } from "@ethersproject/units";
 import { hexAddress2NewAddress } from "utils/NewChainUtils";
 import { TARGET_CHAINID } from "constant/settings";
+import { useSecureMovieContract } from "hooks/useContract";
+import transactor from "components/transactor";
+import useBalance from "hooks/useBalance";
 
 export default function MovieList() {
-  const { library } = useWeb3React();
+  const { library, account } = useWeb3React();
   const router = useRouter();
+  const secureMovieContract = useSecureMovieContract();
+  const balance = useBalance(library, account);
 
   const [secureMovieInfos, setSecureMovieInfos] = useState<Array<SMToken>>();
 
@@ -60,12 +65,14 @@ export default function MovieList() {
 
   function MovieListItem(props) {
     const { item } = props;
+
     const movieToken = item as SMToken;
     const tokenMetaData = useTokenDescription(item.movieTokenUri);
     const ticket = movieToken.tickets[0];
     const price = formatEther(ticket.price);
     const maxTicketNumber = ticket.max;
     const purchaseTime = ticket.duration / 3600;
+    const ticketAddress = ticket.id;
     const owner = hexAddress2NewAddress(movieToken.owner.id, TARGET_CHAINID);
     console.log(`metadata: ${tokenMetaData}`);
     console.log(tokenMetaData);
@@ -84,6 +91,22 @@ export default function MovieList() {
       coverImage: tokenMetaData.tokenImage,
     };
 
+    function buyTickets() {
+      const movieId = movieToken.movieTokenId;
+      console.log(parseEther(price));
+
+      const overrides = {
+        value: parseEther(price)._hex,
+      };
+      const transaction = secureMovieContract.buyTicket(
+        movieId,
+        ticketAddress,
+        1,
+        overrides
+      );
+      transactor(transaction, () => {});
+    }
+
     return (
       <div className="list-item" key={item.name}>
         <span className="name">{item.name}</span>
@@ -101,9 +124,15 @@ export default function MovieList() {
         <span className="price">{price}</span>
         <span className="description">{tokenMetaData.tokenDescription}</span>
         <div className="panel">
-          <Link href="/mint" passHref>
-            <button>Buy</button>
-          </Link>
+          {/* <Link href="/mint" passHref> */}
+          <button
+            onClick={() => {
+              buyTickets();
+            }}
+          >
+            Buy
+          </button>
+          {/* </Link> */}
           <div className="panel-info">
             <span className="bold">{maxTicketNumber} times</span>
             <span className="normal">Remaining Mints</span>
