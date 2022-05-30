@@ -38,7 +38,7 @@ export function HiddenAccount() {
       setActivatingConnector(undefined);
     }
   }, [activatingConnector, connector]);
-  return <></>
+  return <></>;
 }
 
 export default function Account() {

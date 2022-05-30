@@ -8,6 +8,7 @@
  */
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import VideoComponent from "components/movie/video";
 import { useWeb3React } from "@web3-react/core";
@@ -69,7 +70,6 @@ export default function MovieDetail(props) {
     return bytes;
   }
 
-
   function check() {
     try {
       let message = "asdfalksdfjlaskdfjl";
@@ -79,12 +79,16 @@ export default function MovieDetail(props) {
         method: "personal_sign",
         params: [message, account],
       };
-      if (library === undefined && library.provider === undefined && library.provider.sendAsync === undefined) {
+      if (
+        library === undefined &&
+        library.provider === undefined &&
+        library.provider.sendAsync === undefined
+      ) {
         return;
       } else {
         library.provider.sendAsync(request, (error, response) => {
           if (response) {
-            const {r, s } = getSignatureDetail(response.result);
+            const { r, s } = getSignatureDetail(response.result);
             console.log(response);
             console.log(r, s);
             const params = new CheckSecretParams();
@@ -100,7 +104,7 @@ export default function MovieDetail(props) {
           }
         });
       }
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   }
@@ -138,26 +142,39 @@ export default function MovieDetail(props) {
 
   return (
     <div className="detail-container">
+      <Link href="/" passHref>
+        <img className="back" src="/assets/image/back.png" alt="back" />
+      </Link>
       <div className="detail">
         {locked ? (
           <>
-            {active ? (
-              <button
-                onClick={() => {
-                  check();
-                }}
-              >
-                unlock
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  activate(injected);
-                }}
-              >
-                connectWallet
-              </button>
-            )}
+            <div className="cover-container">
+              <img
+                className="movie-cover"
+                src={"/assets/image/cover2.png"}
+                alt="cover"
+              />
+              <div className="cover"></div>
+              {active ? (
+                <button
+                  className="preview"
+                  onClick={() => {
+                    check();
+                  }}
+                >
+                  unlock
+                </button>
+              ) : (
+                <button
+                  className="preview"
+                  onClick={() => {
+                    activate(injected);
+                  }}
+                >
+                  Connect Wallet
+                </button>
+              )}
+            </div>
           </>
         ) : (
           <VideoComponent
@@ -167,6 +184,7 @@ export default function MovieDetail(props) {
         )}
 
         <div className="information">
+          <div className="name">{name}</div>
           <div className="desc">
             <div className="title">Description</div>
             <div className="content">{description}</div>
@@ -175,26 +193,26 @@ export default function MovieDetail(props) {
             <div className="title">Detail</div>
             <div className="content">
               <div className="item">
-                <div>contract address</div>
-                <div>{contractAddress}</div>
+                <div className="item-title">Contract Address</div>
+                <div className="item-content">{contractAddress}</div>
               </div>
               <div className="item">
-                <div>TokenId</div>
-                <div>{tokenId}</div>
+                <div className="item-title">Token ID</div>
+                <div className="item-content">{tokenId}</div>
               </div>
               <div className="item">
-                <div>TokenStandard</div>
-                <div>{tokenStandard}</div>
+                <div className="item-title">Token Standard</div>
+                <div className="item-content">{tokenStandard}</div>
               </div>
               <div className="item">
-                <div>BlockChaiin</div>
-                <div>Newton</div>
+                <div className="item-title">Blockchaiin</div>
+                <div className="item-content">Newton</div>
               </div>
             </div>
           </div>
 
           <div className="extra">
-            <div className="title">FailureTime</div>
+            <div className="title">Failure Time</div>
             <div className="content">{failureTime}</div>
           </div>
         </div>

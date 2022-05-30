@@ -16,7 +16,6 @@ import { Fragment } from "react";
 import { HiddenAccount } from "components/account";
 
 function MyApp({ Component, pageProps }) {
-
   return (
     <Fragment>
       <Head>
@@ -28,7 +27,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <ApolloProvider client={client}>
         <Web3ReactProvider getLibrary={getLibrary}>
-          <HiddenAccount/>
+          <HiddenAccount />
           <Component {...pageProps} />
         </Web3ReactProvider>
       </ApolloProvider>
