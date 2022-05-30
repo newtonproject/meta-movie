@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-18 11:50:55
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-30 10:37:13
+ * @LastEditTime: 2022-05-30 11:12:13
  * @FilePath: /secure-movie/src/hooks/useContract.ts
  * @Description:
  */
@@ -16,6 +16,7 @@ import { getContract } from "utils/contractUtil";
 import { useMemo } from "react";
 import AuctionABI from "../abi/AuctionHouse.json";
 import FlowerABI from "../abi/Flower.json";
+import SecureMovieABI from "../abi/SecureMovie.json";
 
 function useContract(address, ABI, withSignerIfPossible = true) {
   const { library, account } = useActiveWeb3React();
@@ -45,5 +46,6 @@ export function useFlowerContract() {
 }
 
 export function useSecureMovieContract() {
-  return useContract(NEXT_PUBLIC_MOVIE_CONTRACT, FlowerABI);
+  console.log(`NEXT_PUBLIC_MOVIE_CONTRACT:${NEXT_PUBLIC_MOVIE_CONTRACT}`);
+  return useContract(NEXT_PUBLIC_MOVIE_CONTRACT, SecureMovieABI);
 }

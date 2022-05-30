@@ -2,14 +2,22 @@ import React from "react";
 import Link from "next/link";
 import { useSecureMovieContract } from "hooks/useContract";
 import transactor from "components/transactor";
+import { parseEther } from "@ethersproject/units";
+import { useWeb3React } from "@web3-react/core";
 
 export default function MovieCreate() {
+  const { account } = useWeb3React();
   const secureMovieContract = useSecureMovieContract();
-
+  console.log(`contract`);
+  console.log(secureMovieContract);
+  
   function createSecureMovie() {
-    const toAddress = "";
-    const tokenUri = "";
-    transactor(secureMovieContract.createSecureMovie(toAddress, tokenUri), () => {});
+    const toAddress = account;
+    const tokenUri = "https://www.newtonproject.org";
+    const pricePerTicket = parseEther("100")
+    const maxNumberOfTickets = 30; // max 30 ticket
+    const duration = 86400; // 24 hours
+    transactor(secureMovieContract.createSecureMovieAndTickets(toAddress, tokenUri, pricePerTicket, maxNumberOfTickets, duration), () => {});
   }
 
   return (
