@@ -37,11 +37,7 @@ export async function parseTokenMetaData(uri): Promise<TokenMetaData> {
 
     // Video Support, using `video` key
     if (tokenExtraInfo.video !== undefined) {
-      const _videoUri = UriResolver(
-        tokenExtraInfo.video.substring(
-          tokenExtraInfo.video.lastIndexOf("/") + 1
-        )
-      );
+      const _videoUri = UriResolver(tokenExtraInfo.video);
       data.nftType = "video";
       data.tokenVideo = _videoUri;
     }
@@ -70,18 +66,7 @@ export async function parseTokenMetaData(uri): Promise<TokenMetaData> {
         data.tokenOriginImage = tokenOriginImage;
       }
     }
-    // add animation
-    if (tokenExtraInfo.animation_uri !== undefined) {
-      const animationUrl = UriResolver(
-        tokenExtraInfo.animation_uri.substring(
-          tokenExtraInfo.animation_uri.lastIndexOf("/") + 1
-        )
-      );
-      data.nftType = "animation";
-      data.tokenAnimation = animationUrl;
-      data.aspect_ratio = tokenExtraInfo.aspect_ratio;
-      data.iframe_aspect_ratio = tokenExtraInfo.iframe_aspect_ratio;
-    }
+
     if (tokenExtraInfo.description !== undefined) {
       data.tokenDescription = tokenExtraInfo.description;
     }

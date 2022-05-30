@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-30 20:07:28
+ * @LastEditTime: 2022-05-31 00:48:16
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -22,30 +22,7 @@ export default function MovieDetail(props) {
   const playerRef = useRef(null);
   const { library, account, active, activate } = useWeb3React();
   const [locked, setLocked] = useState(true);
-
-  // const {
-  //   name,
-  //   description,
-  //   contractAddress,
-  //   tokenId,
-  //   tokenStandard,
-  //   failureTime,
-  //   videoUrl,
-  //   videoSecret,
-  // } = router.query;
-
-  const a = {
-    name: "Ready Player One",
-    description:
-      "Ready Player One is a 2018 American science fiction adventure film based on Ernest Cline's novel of the same name. Directed by Steven Spielberg, from a screenplay by Zak Penn and Cline, it stars Tye Sheridan, Olivia Cooke..",
-    contractAddress: "NEW182XXXXX",
-    tokenId: "1",
-    tokenStandard: "EVT",
-    failureTime: "2020 12 31",
-    videoUrl:
-      "http://127.0.0.1:8081/ipfs/QmYTXR42voo8orAnnhC4cuPor75QxjHd2X6e4L7QwToTQ5/output.m3u8",
-    videoSecret: "d2e8b0d37ad163aec25cad21a6d1202a",
-  };
+  const [videoSecret, setVideoSecret] = useState("");
 
   const {
     name,
@@ -55,8 +32,8 @@ export default function MovieDetail(props) {
     tokenStandard,
     failureTime,
     videoUrl,
-    videoSecret,
-  } = a;
+    coverImage,
+  } = router.query;
 
   function encryptionCallback(key) {
     var data = Buffer.from(videoSecret.toString());
@@ -72,7 +49,7 @@ export default function MovieDetail(props) {
 
   function check() {
     try {
-      let message = "asdfalksdfjlaskdfjl";
+      let message = parseInt((Date.now() / 1000).toString()).toString();
       let request = {
         jsonrpc: "2.0",
         id: 2,
@@ -89,19 +66,23 @@ export default function MovieDetail(props) {
         library.provider.sendAsync(request, (error, response) => {
           if (response) {
             const { r, s } = getSignatureDetail(response.result);
-            console.log(response);
-            console.log(r, s);
             const params = new CheckSecretParams();
-            params.token_id = tokenId;
-            params.contract_address = "";
-            params.sign_message =
-              "Ethereum Signed Message:\n" + message.length + message;
+            params.token_id = tokenId.toString();
+            params.contract_address = contractAddress.toString();
+            params.sign_message = message;
             params.sign_r = r;
             params.sign_s = s;
             console.log(params);
-
-            // const password = Http.getInstance().secretCheck(params);
-            setLocked(false);
+            Http.getInstance()
+              .secretCheck(params)
+              .then((res) => {
+                console.log(res);
+                setVideoSecret(res.result.secret);
+                setLocked(false);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           } else {
             console.log("get balance error:" + error);
           }
@@ -152,11 +133,7 @@ export default function MovieDetail(props) {
         {locked ? (
           <>
             <div className="cover-container">
-              <img
-                className="movie-cover"
-                src={"/assets/image/cover2.png"}
-                alt="cover"
-              />
+              <img className="movie-cover" src={coverImage} alt="cover" />
               <div className="cover"></div>
               {active ? (
                 <button

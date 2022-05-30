@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 00:26:12
+ * @LastEditTime: 2022-05-31 00:41:35
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
  * @Description:
  */
@@ -51,57 +51,10 @@ export default function MovieList() {
     return <>Error :(</>;
   }
 
-  const item1 = {
-    address: "NEW5154...wdWM",
-    time: "24 hours",
-    name: "Free Guy",
-    cover: "/assets/image/cover1.png",
-    price: "2,000,000 NEW",
-    description:
-      "Here is the video Description Here is the video Description Here is the video",
-  };
-
-  const item2 = {
-    address: "NEW5154...wdWM",
-    time: "24 hours",
-    name: "Free Guy",
-    cover: "/assets/image/cover2.png",
-    price: "2,000,000 NEW",
-    description:
-      "Here is the video Description Here is the video Description Here is the video",
-  };
-
-  const list = [
-    item1,
-    item2,
-    item1,
-    item2,
-    item1,
-    item2,
-    item1,
-    item2,
-    item1,
-    item2,
-    item1,
-    item2,
-  ];
-
-  function openMovieDetail() {
-    const props = {
-      name: "Ready Player One",
-      description:
-        "Ready Player One is a 2018 American science fiction adventure film based on Ernest Cline's novel of the same name. Directed by Steven Spielberg, from a screenplay by Zak Penn and Cline, it stars Tye Sheridan, Olivia Cooke..",
-      contractAddress: "NEW182XXXXX",
-      tokenId: "1",
-      tokenStandard: "EVT",
-      failureTime: "2020 12 31",
-      videoUrl:
-        "http://127.0.0.1:8081/ipfs/QmYTXR42voo8orAnnhC4cuPor75QxjHd2X6e4L7QwToTQ5/output.m3u8",
-      videoSecret: "d2e8b0d37ad163aec25cad21a6d1202a",
-    };
+  function openMovieDetail(detailProps) {
     router.push({
       pathname: "/detail",
-      query: props,
+      query: detailProps,
     });
   }
 
@@ -114,6 +67,23 @@ export default function MovieList() {
     const maxTicketNumber = ticket.max;
     const purchaseTime = ticket.duration / 3600;
     const owner = hexAddress2NewAddress(movieToken.owner.id, TARGET_CHAINID);
+    console.log(`metadata: ${tokenMetaData}`);
+    console.log(tokenMetaData);
+
+    const detailProps = {
+      name: tokenMetaData.tokenName,
+      description: tokenMetaData.tokenDescription,
+      contractAddress: hexAddress2NewAddress(
+        movieToken.movieContract.id,
+        TARGET_CHAINID
+      ),
+      tokenId: movieToken.movieTokenId,
+      tokenStandard: "EVT",
+      failureTime: "2020 12 31",
+      videoUrl: tokenMetaData.tokenVideo,
+      coverImage: tokenMetaData.tokenImage,
+    };
+
     return (
       <div className="list-item" key={item.name}>
         <span className="name">{item.name}</span>
@@ -123,7 +93,7 @@ export default function MovieList() {
             src={tokenMetaData.tokenImage}
             alt="cover"
             onClick={() => {
-              openMovieDetail();
+              openMovieDetail(detailProps);
             }}
           />
           <button className="preview">Preview</button>
