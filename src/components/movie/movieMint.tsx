@@ -10,7 +10,6 @@ import useBlock from "../../hooks/useBlock";
 import { useFlowerContract } from "../../hooks/useContract";
 import { FlowerList, Memory, Property } from "../../model/flower";
 import React, { useRef, useState } from "react";
-import { NFT_FLOWER } from "../../services/queryMemory";
 import {
   getBlockUrl,
   hexAddress2NewAddress,

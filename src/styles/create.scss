@@ -14,6 +14,22 @@
     .cover-container {
       @apply relative px-4;
 
+      .cover-back {
+        @apply mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-800 border-dashed rounded-md space-y-1 text-center;
+
+        .cover-svg {
+          @apply mx-auto h-12 text-gray-400;
+        }
+
+        .cover-label {
+          @apply text-gray333 text-base mt-2;
+        }
+
+        p {
+          @apply text-gray999 text-xs;
+        }
+      }
+
       .cover {
         @apply w-full aspect-video object-cover;
       }
