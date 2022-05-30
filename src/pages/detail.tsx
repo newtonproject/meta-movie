@@ -94,11 +94,12 @@ export default function MovieDetail(props) {
             const params = new CheckSecretParams();
             params.token_id = tokenId;
             params.contract_address = "";
-            params.sign_message = "Ethereum Signed Message:\n" + message.length + message;
+            params.sign_message =
+              "Ethereum Signed Message:\n" + message.length + message;
             params.sign_r = r;
             params.sign_s = s;
             console.log(params);
-            
+
             // const password = Http.getInstance().secretCheck(params);
             setLocked(false);
           } else {

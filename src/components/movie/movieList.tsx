@@ -10,6 +10,11 @@ import { useWeb3React } from "@web3-react/core";
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import {
+  getSecureMovieTokens,
+  GET_SECURE_MOVIE_TOKENS,
+} from "../../services/graph/querySMTokens";
+import { useEffect } from "react";
 
 export default function MovieList() {
   const { library } = useWeb3React();
@@ -49,6 +54,16 @@ export default function MovieList() {
     item1,
     item2,
   ];
+
+  useEffect(() => {
+    getSecureMovieTokens()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   function openMovieDetail() {
     const props = {

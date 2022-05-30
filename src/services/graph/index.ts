@@ -7,7 +7,8 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import {
   GRAPH_ENDPOINT,
-  NEXT_PUBLIC_FLOWER_GRAPH,
+  NEXT_PUBLIC_MOVIE_GRAPH,
+  // NEXT_PUBLIC_FLOWER_GRAPH,
 } from "../../constant/settings";
 
 function skipLimitPagination(keyArgs) {
@@ -42,12 +43,16 @@ const client = new ApolloClient({
     typePolicies: {
       Query: {
         fields: {
-          flowers: skipLimitPagination(["orderDirection", "orderBy"]),
+          secureMovieTokens: skipLimitPagination(["orderDirection", "orderBy"]),
+          secureMovieTicketTokens: skipLimitPagination([
+            "orderDirection",
+            "orderBy",
+          ]),
         },
       },
     },
   }),
-  uri: NEXT_PUBLIC_FLOWER_GRAPH,
+  uri: NEXT_PUBLIC_MOVIE_GRAPH,
 });
 
 export default client;

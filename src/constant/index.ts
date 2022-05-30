@@ -22,7 +22,8 @@ export const IPFS_GATEWAY_PROTOCOL = "https";
 export const IPFS_GATEWAY_URL = `${IPFS_GATEWAY_PROTOCOL}://${IPFS_GATEWAY_HOST}:${IPFS_GATEWAY_PORT}/ipfs/`;
 
 export const FILE_UPLOAD_URL = "https://ipfs.devnet.newtonproject.org/upload";
-export const JSON_UPLOAD_URL = "https://ipfs.devnet.newtonproject.org/api/v0/add";
+export const JSON_UPLOAD_URL =
+  "https://ipfs.devnet.newtonproject.org/api/v0/add";
 
 export const VERIFIED_ADDRESSES = {
   "0x1774253cfaa39015fa5e7c4c6a0deb8c1a994937": {
@@ -73,7 +74,7 @@ export const NETWORKS = {
     rpcUrl: `https://rpc3.newchain.cloud.diynova.com/`,
     blockExplorer: "",
     subgraphUri:
-      "https://testnetnft.cloud.diynova.com/subgraphs/name/NewtonNFT/NFT",
+      "https://graph.devnet.newtonproject.org/subgraphs/name/secure-movie/dev",
   },
   NewChainTestNet: {
     name: "NewChainTestNet",
@@ -84,7 +85,7 @@ export const NETWORKS = {
     rpcUrl: `https://rpc3.newchain.cloud.diynova.com/`,
     blockExplorer: "http://e.testnet.diynova.com/",
     subgraphUri:
-      "https://testnetnft.cloud.diynova.com/subgraphs/name/NewtonNFT/NFT",
+      "https://graph.devnet.newtonproject.org/subgraphs/name/secure-movie/dev",
     bearBrickAddress: "0x8215e1464cef8575edd81d80ceee9077d5c7c2b3",
     chineseCharactorAddress: "0x1774253cfaa39015fa5e7c4c6a0deb8c1a994937",
     useNewAddress: true,
