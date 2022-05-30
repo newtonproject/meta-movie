@@ -10,14 +10,23 @@ export default function MovieCreate() {
   const secureMovieContract = useSecureMovieContract();
   console.log(`contract`);
   console.log(secureMovieContract);
-  
+
   function createSecureMovie() {
     const toAddress = account;
     const tokenUri = "https://www.newtonproject.org";
-    const pricePerTicket = parseEther("100")
+    const pricePerTicket = parseEther("100");
     const maxNumberOfTickets = 30; // max 30 ticket
     const duration = 86400; // 24 hours
-    transactor(secureMovieContract.createSecureMovieAndTickets(toAddress, tokenUri, pricePerTicket, maxNumberOfTickets, duration), () => {});
+    transactor(
+      secureMovieContract.createSecureMovieAndTickets(
+        toAddress,
+        tokenUri,
+        pricePerTicket,
+        maxNumberOfTickets,
+        duration
+      ),
+      () => {}
+    );
   }
 
   return (
@@ -65,7 +74,9 @@ export default function MovieCreate() {
           <input className="normal-input" placeholder="The video's price" />
           <div className="new">NEW</div>
         </div>
-        <button className="confirm" onClick={() => createSecureMovie()}>Confirm</button>
+        <button className="confirm" onClick={() => createSecureMovie()}>
+          Confirm
+        </button>
       </div>
     </div>
   );
