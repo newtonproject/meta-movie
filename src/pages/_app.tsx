@@ -18,7 +18,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <Fragment>
       <Head>
-        <link href="/css/video-js.min.css" rel="stylesheet" />
         <script type="text/javascript" src="/js/video.min.js" />
         <script
           type="text/javascript"

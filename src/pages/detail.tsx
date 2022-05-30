@@ -2,63 +2,48 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 18:46:22
+ * @LastEditTime: 2022-05-30 18:00:36
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
 
-import { useEffect, useRef } from "react";
-
-export const VideoComponent = (props) => {
-  const videoRef = useRef(null);
-  const playerRef = useRef(null);
-  const { options, onReady } = props;
-
-  useEffect(() => {
-    // Make sure Video.js player is only initialized once
-    let player;
-    if (!playerRef.current) {
-      const videoElement = videoRef.current;
-      if (!videoElement) return;
-      // @ts-ignore
-      player = playerRef.current = videojs(videoElement, options, () => {
-        player.log("player is ready");
-        onReady && onReady(player);
-      });
-      // You can update player in the `else` block here, for example:
-    } else {
-      player.autoplay(options.autoplay);
-      player.src(options.sources);
-    }
-  }, [options, videoRef]);
-
-  // Dispose the Video.js player when the functional component unmounts
-  useEffect(() => {
-    const player = playerRef.current;
-
-    return () => {
-      if (player) {
-        player.dispose();
-        playerRef.current = null;
-      }
-    };
-  }, [playerRef]);
-
-  return (
-    <div className="video-container">
-      <div data-vjs-player>
-        <video
-          ref={videoRef}
-          className="video-js vjs-big-play-centered video"
-        />
-      </div>
-    </div>
-  );
-};
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
+import VideoComponent from "components/movie/video";
+import { useWeb3React } from "@web3-react/core";
+import { injected } from "constant/connectors";
+import Http from "services/http";
+import { CheckSecretParams } from "model";
 
 export default function MovieDetail(props) {
   const router = useRouter();
+  const playerRef = useRef(null);
+  const { library, account, active, activate } = useWeb3React();
+  const [locked, setLocked] = useState(true);
+
+  // const {
+  //   name,
+  //   description,
+  //   contractAddress,
+  //   tokenId,
+  //   tokenStandard,
+  //   failureTime,
+  //   videoUrl,
+  //   videoSecret,
+  // } = router.query;
+
+  const a = {
+    name: "Ready Player One",
+    description:
+      "Ready Player One is a 2018 American science fiction adventure film based on Ernest Cline's novel of the same name. Directed by Steven Spielberg, from a screenplay by Zak Penn and Cline, it stars Tye Sheridan, Olivia Cooke..",
+    contractAddress: "NEW182XXXXX",
+    tokenId: "1",
+    tokenStandard: "EVT",
+    failureTime: "2020 12 31",
+    videoUrl:
+      "http://127.0.0.1:8081/ipfs/QmYTXR42voo8orAnnhC4cuPor75QxjHd2X6e4L7QwToTQ5/output.m3u8",
+    videoSecret: "d2e8b0d37ad163aec25cad21a6d1202a",
+  };
 
   const {
     name,
@@ -69,9 +54,7 @@ export default function MovieDetail(props) {
     failureTime,
     videoUrl,
     videoSecret,
-  } = router.query;
-
-  const playerRef = useRef(null);
+  } = a;
 
   function encryptionCallback(key) {
     var data = Buffer.from(videoSecret.toString());
@@ -85,8 +68,42 @@ export default function MovieDetail(props) {
     return bytes;
   }
 
+
+  function check() {
+    try {
+      let message = "asdfalksdfjlaskdfjl";
+      let request = {
+        jsonrpc: "2.0",
+        id: 2,
+        method: "personal_sign",
+        params: [message, account],
+      };
+      if (library === undefined && library.provider === undefined && library.provider.sendAsync === undefined) {
+        return;
+      } else {
+        library.provider.sendAsync(request, (error, response) => {
+          if (response) {
+            console.log(`sign res: ${response.result}`);
+            const params = new CheckSecretParams();
+            params.token_id = tokenId;
+            params.contract_address = "";
+            params.sign_message = "";
+            params.sign_r = "";
+            params.sign_s = "";
+            // const password = Http.getInstance().secretCheck(params);
+            setLocked(false);
+          } else {
+            console.log("get balance error:" + error);
+          }
+        });
+      }
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
   const videoJsOptions = {
-    autoplay: true,
+    autoplay: false,
     controls: true,
     responsive: true,
     fluid: true,
@@ -106,7 +123,6 @@ export default function MovieDetail(props) {
 
   const handlePlayerReady = (player) => {
     playerRef.current = player;
-
     // You can handle player events here, for example:
     player.on("waiting", () => {
       player.log("player is waiting");
@@ -120,7 +136,33 @@ export default function MovieDetail(props) {
   return (
     <div className="detail-container">
       <div className="detail">
-        <VideoComponent options={videoJsOptions} onReady={handlePlayerReady} />
+        {locked ? (
+          <>
+            {active ? (
+              <button
+                onClick={() => {
+                  check();
+                }}
+              >
+                unlock
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  activate(injected);
+                }}
+              >
+                connectWallet
+              </button>
+            )}
+          </>
+        ) : (
+          <VideoComponent
+            options={videoJsOptions}
+            onReady={handlePlayerReady}
+          />
+        )}
+
         <div className="information">
           <div className="desc">
             <div className="title">Description</div>
