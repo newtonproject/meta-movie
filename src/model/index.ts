@@ -4,7 +4,7 @@
  * @LastEditors: pony@diynova.com
  * @LastEditTime: 2022-05-30 14:38:32
  * @FilePath: /secure-movie/src/model/index.ts
- * @Description: 
+ * @Description:
  */
 export class CheckSecretParams {
   token_id: string;

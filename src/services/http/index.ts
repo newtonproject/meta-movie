@@ -4,7 +4,7 @@ import { CheckSecretParams } from "model";
 export const Api = {
   baseUrl: process.env.NEXT_PUBLIC_API_URL + "/api/v1",
   upload: "/secret/upload/",
-  check: "/secret/check/"
+  check: "/secret/check/",
 };
 
 const ajax = axios.create({
@@ -48,7 +48,6 @@ function _post(url, params) {
 
 let instance = null;
 
-
 class Http {
   static getInstance() {
     if (instance === undefined || instance === null) {
@@ -64,7 +63,6 @@ class Http {
   secretCheck(data: CheckSecretParams) {
     return _post(Api.check, data);
   }
-
 }
 
 export default Http;
