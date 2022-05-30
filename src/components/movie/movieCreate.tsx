@@ -33,7 +33,6 @@ export default function MovieCreate() {
     action: `${Api.baseUrl}${Api.upload}`,
     beforeUpload: (file) => {
       const allowedType = ["video/mp4"];
-      console.log(file.type);
       if (allowedType.includes(file.type) === false) {
         message.error(`${file.name} is not a valid file.`);
       }
@@ -45,8 +44,14 @@ export default function MovieCreate() {
       }
       if (info.file.status === "done") {
         message.success(`${info.file.name} file uploaded successfully`);
-        setTokenVideoIpfsHash(info.file.response.result.cid);
-        setTokenCoverIpfsHash(info.file.response.result.cover_cid);
+        if (info.file.response.error_code == 1) {
+          setTokenVideoIpfsHash(info.file.response.result.cid);
+          setTokenCoverIpfsHash(info.file.response.result.cover_cid);
+        } else {
+          message.error(
+            `${info.file.response.error_message} file upload failed.`
+          );
+        }
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
@@ -74,12 +79,10 @@ export default function MovieCreate() {
       video: UriResolver("ipfs://" + tokenVideoIpfsHash),
     };
     try {
-      const url = FILE_UPLOAD_URL;
-      const result = await axios.post(url, tokenMetaData);
+      const result = await axios.post("/api/upload", tokenMetaData);
       if (result?.status === 200 && result?.data?.cid) {
-        const tokenURI = "ipfs://" + result.data.cid;
+        const tokenURI = "ipfs://" + result.data.path;
         console.log("tokenURI:", tokenURI);
-
         const toAddress = account;
         const pricePerTicket = parseEther(nftPrice);
         const maxNumberOfTickets = 30; // max 30 ticket
