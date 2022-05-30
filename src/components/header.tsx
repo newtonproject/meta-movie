@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from "react";
 import Link from "next/link";
 import { Dialog, Transition } from "@headlessui/react";
-import Auction from "./auction";
+import Account from "./account";
+
 export default function Header(props) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   return (
@@ -9,7 +10,7 @@ export default function Header(props) {
       <div className="header-pc">
         <div>
           <div>
-            <Auction />
+            <Account />
           </div>
         </div>
       </div>
@@ -141,7 +142,7 @@ const SiteNavMenu = (props) => {
           <Link href="/">BID</Link>
         </span>
       </p>
-      <Auction />
+      <Account />
       <span>
         <a href="#">
           <img src="/assets/image/footer1.png" alt="img" />

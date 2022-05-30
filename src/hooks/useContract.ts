@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-18 11:50:55
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-30 11:12:13
+ * @LastEditTime: 2022-05-30 13:44:14
  * @FilePath: /secure-movie/src/hooks/useContract.ts
  * @Description:
  */
@@ -46,6 +46,5 @@ export function useFlowerContract() {
 }
 
 export function useSecureMovieContract() {
-  console.log(`NEXT_PUBLIC_MOVIE_CONTRACT:${NEXT_PUBLIC_MOVIE_CONTRACT}`);
   return useContract(NEXT_PUBLIC_MOVIE_CONTRACT, SecureMovieABI);
 }
