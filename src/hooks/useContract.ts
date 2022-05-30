@@ -2,13 +2,14 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-18 11:50:55
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-24 09:57:58
- * @FilePath: /infinity-flower/src/hooks/useContract.ts
+ * @LastEditTime: 2022-05-30 10:37:13
+ * @FilePath: /secure-movie/src/hooks/useContract.ts
  * @Description:
  */
 import {
   NEXT_AUCTION_CONTRACT_ADDRESS,
   NEXT_PUBLIC_FLOWER_CONTRACT_ADDRESS,
+  NEXT_PUBLIC_MOVIE_CONTRACT,
 } from "constant/settings";
 import { useActiveWeb3React } from "hooks/useWeb3";
 import { getContract } from "utils/contractUtil";
@@ -41,4 +42,8 @@ export function useAuction() {
 
 export function useFlowerContract() {
   return useContract(NEXT_PUBLIC_FLOWER_CONTRACT_ADDRESS, FlowerABI);
+}
+
+export function useSecureMovieContract() {
+  return useContract(NEXT_PUBLIC_MOVIE_CONTRACT, FlowerABI);
 }
