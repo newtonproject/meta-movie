@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-30 18:00:36
+ * @LastEditTime: 2022-05-30 18:34:24
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -14,6 +14,7 @@ import { useWeb3React } from "@web3-react/core";
 import { injected } from "constant/connectors";
 import Http from "services/http";
 import { CheckSecretParams } from "model";
+import { getSignatureDetail } from "utils";
 
 export default function MovieDetail(props) {
   const router = useRouter();
@@ -83,13 +84,15 @@ export default function MovieDetail(props) {
       } else {
         library.provider.sendAsync(request, (error, response) => {
           if (response) {
-            console.log(`sign res: ${response.result}`);
+            const {r, s } = getSignatureDetail(response.result);
+            console.log(response);
+            console.log(r, s);
             const params = new CheckSecretParams();
             params.token_id = tokenId;
             params.contract_address = "";
-            params.sign_message = "";
-            params.sign_r = "";
-            params.sign_s = "";
+            params.sign_message = message;
+            params.sign_r = r;
+            params.sign_s = s;
             // const password = Http.getInstance().secretCheck(params);
             setLocked(false);
           } else {

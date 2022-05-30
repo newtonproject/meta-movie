@@ -2,8 +2,8 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-20 12:12:20
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-20 12:13:21
- * @FilePath: /cryptofamily-website/src/utils/index.ts
+ * @LastEditTime: 2022-05-30 18:33:32
+ * @FilePath: /secure-movie/src/utils/index.ts
  * @Description:
  */
 import axios from "axios";
@@ -26,4 +26,15 @@ export async function getInfo(url) {
       return null;
     }
   }
+}
+
+
+export function getSignatureDetail(sig) {
+  if (sig.startsWith("0x")) {
+    sig = sig.substring(2);
+  }
+  const len = sig.length / 2;
+  const r = sig.substring(0, len);
+  const s = sig.substring(len);
+  return { r, s };
 }
