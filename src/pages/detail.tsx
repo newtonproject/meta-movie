@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-30 18:34:24
+ * @LastEditTime: 2022-05-30 20:07:28
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -94,9 +94,11 @@ export default function MovieDetail(props) {
             const params = new CheckSecretParams();
             params.token_id = tokenId;
             params.contract_address = "";
-            params.sign_message = message;
+            params.sign_message = "Ethereum Signed Message:\n" + message.length + message;
             params.sign_r = r;
             params.sign_s = s;
+            console.log(params);
+            
             // const password = Http.getInstance().secretCheck(params);
             setLocked(false);
           } else {

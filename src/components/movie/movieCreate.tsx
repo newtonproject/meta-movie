@@ -10,10 +10,11 @@ import { Api } from "services/http";
 import { UriResolver } from "../../functions/UriResolver";
 import { JSON_UPLOAD_URL } from "constant";
 import axios from "axios";
+import ipfsClient from "services/ipfs";
 
 export default function MovieCreate() {
   const { library } = useWeb3React();
-  const FILE_UPLOAD_URL = "https://files.cloud.diynova.com/upload";
+  const FILE_UPLOAD_URL = "https://files.cloud.diynova.com/upload_json";
 
   const [tokenVideoIpfsHash, setTokenVideoIpfsHash] = useState("");
   const [tokenCoverIpfsHash, setTokenCoverIpfsHash] = useState("");
@@ -45,7 +46,7 @@ export default function MovieCreate() {
       if (info.file.status === "done") {
         message.success(`${info.file.name} file uploaded successfully`);
         setTokenVideoIpfsHash(info.file.response.result.cid);
-        setTokenCoverIpfsHash(info.file.response.result.cid);
+        setTokenCoverIpfsHash(info.file.response.result.cover_cid);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
@@ -68,12 +69,12 @@ export default function MovieCreate() {
       name: nftName,
       description: nftDesc,
       type: "video",
-      image: "",
+      image: UriResolver("ipfs://" + tokenCoverIpfsHash),
       encrypt: "aes-128",
-      video: "",
+      video: UriResolver("ipfs://" + tokenVideoIpfsHash),
     };
     try {
-      const url = JSON_UPLOAD_URL;
+      const url = FILE_UPLOAD_URL;
       const result = await axios.post(url, tokenMetaData);
       if (result?.status === 200 && result?.data?.cid) {
         const tokenURI = "ipfs://" + result.data.cid;
