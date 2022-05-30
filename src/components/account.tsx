@@ -9,8 +9,39 @@ import { formatEther } from "@ethersproject/units";
 import { hexAddress2NewAddress, shortAddress } from "../utils/NewChainUtils";
 import { TARGET_CHAINID } from "../constant/settings";
 
+export function HiddenAccount() {
+  const context = useWeb3React();
+
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
+
+  const [activatingConnector, setActivatingConnector] = useState();
+
+  const balance = useBalance(library, account);
+
+  // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
+  const triedEager = useEagerConnect();
+
+  // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
+  useInactiveListener(!triedEager || !!activatingConnector);
+
+  useEffect(() => {
+    if (activatingConnector && activatingConnector === connector) {
+      setActivatingConnector(undefined);
+    }
+  }, [activatingConnector, connector]);
+  return <></>
+}
+
 export default function Account() {
-  const { Paragraph } = Typography;
   const context = useWeb3React();
 
   const {

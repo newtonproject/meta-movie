@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 18:08:16
+ * @LastEditTime: 2022-05-30 18:30:29
  * @FilePath: /secure-movie/src/pages/_app.tsx
  * @Description:
  */
@@ -13,8 +13,10 @@ import "../styles/globals.scss";
 import { Web3ReactProvider } from "@web3-react/core";
 import getLibrary from "../utils/contractUtil";
 import { Fragment } from "react";
+import { HiddenAccount } from "components/account";
 
 function MyApp({ Component, pageProps }) {
+
   return (
     <Fragment>
       <Head>
@@ -26,6 +28,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <ApolloProvider client={client}>
         <Web3ReactProvider getLibrary={getLibrary}>
+          <HiddenAccount/>
           <Component {...pageProps} />
         </Web3ReactProvider>
       </ApolloProvider>
