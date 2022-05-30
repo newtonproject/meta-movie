@@ -69,7 +69,6 @@ export default function MovieDetail(props) {
     return bytes;
   }
 
-
   function check() {
     try {
       let message = "asdfalksdfjlaskdfjl";
@@ -79,22 +78,27 @@ export default function MovieDetail(props) {
         method: "personal_sign",
         params: [message, account],
       };
-      if (library === undefined && library.provider === undefined && library.provider.sendAsync === undefined) {
+      if (
+        library === undefined &&
+        library.provider === undefined &&
+        library.provider.sendAsync === undefined
+      ) {
         return;
       } else {
         library.provider.sendAsync(request, (error, response) => {
           if (response) {
-            const {r, s } = getSignatureDetail(response.result);
+            const { r, s } = getSignatureDetail(response.result);
             console.log(response);
             console.log(r, s);
             const params = new CheckSecretParams();
             params.token_id = tokenId;
             params.contract_address = "";
-            params.sign_message = "Ethereum Signed Message:\n" + message.length + message;
+            params.sign_message =
+              "Ethereum Signed Message:\n" + message.length + message;
             params.sign_r = r;
             params.sign_s = s;
             console.log(params);
-            
+
             // const password = Http.getInstance().secretCheck(params);
             setLocked(false);
           } else {
@@ -102,7 +106,7 @@ export default function MovieDetail(props) {
           }
         });
       }
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   }

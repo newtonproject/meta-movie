@@ -22,7 +22,8 @@ export const IPFS_GATEWAY_PROTOCOL = "https";
 export const IPFS_GATEWAY_URL = `${IPFS_GATEWAY_PROTOCOL}://${IPFS_GATEWAY_HOST}:${IPFS_GATEWAY_PORT}/ipfs/`;
 
 export const FILE_UPLOAD_URL = "https://ipfs.devnet.newtonproject.org/upload";
-export const JSON_UPLOAD_URL = "https://ipfs.devnet.newtonproject.org/api/v0/add";
+export const JSON_UPLOAD_URL =
+  "https://ipfs.devnet.newtonproject.org/api/v0/add";
 
 export const VERIFIED_ADDRESSES = {
   "0x1774253cfaa39015fa5e7c4c6a0deb8c1a994937": {

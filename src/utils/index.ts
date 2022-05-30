@@ -28,7 +28,6 @@ export async function getInfo(url) {
   }
 }
 
-
 export function getSignatureDetail(sig) {
   if (sig.startsWith("0x")) {
     sig = sig.substring(2);
