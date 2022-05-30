@@ -27,9 +27,7 @@ export function UriResolver(uri = "", baseUri = "", forceCache = false) {
       return uri;
     case "ipfs":
       // use IPFS gateway
-      const res = forceCache
-        ? NEXT_PUBLIC_CACHE_URL + GetIpfsCid(uri)
-        : IPFS_GATEWAY_BASE_URL + GetIpfsCid(uri);
+      const res = IPFS_GATEWAY_BASE_URL + GetIpfsCid(uri);
       return res;
     case "ar":
       // use AR gateway

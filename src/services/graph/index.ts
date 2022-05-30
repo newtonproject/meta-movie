@@ -5,11 +5,7 @@
  * @copyright (c) 2021 Newton Foundation. All rights reserved.
  */
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-import {
-  GRAPH_ENDPOINT,
-  NEXT_PUBLIC_MOVIE_GRAPH,
-  // NEXT_PUBLIC_FLOWER_GRAPH,
-} from "../../constant/settings";
+import { NEXT_PUBLIC_MOVIE_GRAPH } from "../../constant/settings";
 
 function skipLimitPagination(keyArgs) {
   if (keyArgs === void 0) {

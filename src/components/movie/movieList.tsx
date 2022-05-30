@@ -2,23 +2,54 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-28 22:23:59
+ * @LastEditTime: 2022-05-31 00:26:12
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
  * @Description:
  */
 import { useWeb3React } from "@web3-react/core";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {
-  getSecureMovieTokens,
-  GET_SECURE_MOVIE_TOKENS,
-} from "../../services/graph/querySMTokens";
+import { GET_SECURE_MOVIE_TOKENS } from "../../services/graph/querySMTokens";
 import { useEffect } from "react";
+import { useQuery } from "@apollo/client";
+import { SecureMovieInfo, SMToken } from "entities/SMEntity";
+import { pageSize, POLLING_INTERVAL } from "constant";
+import { useTokenDescription } from "hooks/useTokenDescription";
+import { formatEther } from "@ethersproject/units";
+import { hexAddress2NewAddress } from "utils/NewChainUtils";
+import { TARGET_CHAINID } from "constant/settings";
 
 export default function MovieList() {
   const { library } = useWeb3React();
   const router = useRouter();
+
+  const [secureMovieInfos, setSecureMovieInfos] = useState<Array<SMToken>>();
+
+  const { loading, error, data, fetchMore } = useQuery<SecureMovieInfo>(
+    GET_SECURE_MOVIE_TOKENS,
+    {
+      variables: {
+        skip: 0,
+        first: pageSize,
+        orderBy: "mintTime",
+        orderDirection: "desc",
+      },
+      fetchPolicy: "cache-and-network",
+      pollInterval: POLLING_INTERVAL,
+      onCompleted: (data) => {
+        console.log(data);
+        setSecureMovieInfos(data.secureMovieTokens);
+      },
+    }
+  );
+
+  if (loading) {
+    return <>Loading...</>;
+  }
+  if (error) {
+    return <>Error :(</>;
+  }
 
   const item1 = {
     address: "NEW5154...wdWM",
@@ -55,16 +86,6 @@ export default function MovieList() {
     item2,
   ];
 
-  useEffect(() => {
-    getSecureMovieTokens()
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
   function openMovieDetail() {
     const props = {
       name: "Ready Player One",
@@ -86,13 +107,20 @@ export default function MovieList() {
 
   function MovieListItem(props) {
     const { item } = props;
+    const movieToken = item as SMToken;
+    const tokenMetaData = useTokenDescription(item.movieTokenUri);
+    const ticket = movieToken.tickets[0];
+    const price = formatEther(ticket.price);
+    const maxTicketNumber = ticket.max;
+    const purchaseTime = ticket.duration / 3600;
+    const owner = hexAddress2NewAddress(movieToken.owner.id, TARGET_CHAINID);
     return (
       <div className="list-item" key={item.name}>
         <span className="name">{item.name}</span>
         <div className="cover-container">
           <img
             className="cover"
-            src={item.cover}
+            src={tokenMetaData.tokenImage}
             alt="cover"
             onClick={() => {
               openMovieDetail();
@@ -100,22 +128,23 @@ export default function MovieList() {
           />
           <button className="preview">Preview</button>
         </div>
-        <span className="price">{item.price}</span>
-        <span className="description">{item.description}</span>
+        <span className="price">{price}</span>
+        <span className="description">{tokenMetaData.tokenDescription}</span>
         <div className="panel">
           <Link href="/mint" passHref>
-            <button>Mint</button>
+            <button>Buy</button>
           </Link>
-
           <div className="panel-info">
-            <span className="bold">10 times</span>
+            <span className="bold">{maxTicketNumber} times</span>
             <span className="normal">Remaining Mints</span>
           </div>
         </div>
-        <span className="time">Valid time after purchase: {item.time}</span>
+        <span className="time">
+          Valid time after purchase: {purchaseTime} hour
+        </span>
         <div className="user">
           <img className="user-icon" src="/assets/image/user.png" alt="user" />
-          <span className="address">{item.address}</span>
+          <span className="address">{owner}</span>
         </div>
       </div>
     );
@@ -123,9 +152,10 @@ export default function MovieList() {
 
   return (
     <div className="movie-container">
-      {list.map((item, indexed) => {
-        return <MovieListItem key={indexed} item={item} />;
-      })}
+      {secureMovieInfos &&
+        secureMovieInfos.map((item, indexed) => {
+          return <MovieListItem key={indexed} item={item} />;
+        })}
     </div>
   );
 }

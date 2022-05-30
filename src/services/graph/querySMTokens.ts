@@ -1,33 +1,35 @@
+/*
+ * @Author: pony@diynova.com
+ * @Date: 2022-05-30 23:37:32
+ * @LastEditors: pony@diynova.com
+ * @LastEditTime: 2022-05-31 00:16:06
+ * @FilePath: /secure-movie/src/services/graph/querySMTokens.ts
+ * @Description:
+ */
 import { gql } from "@apollo/client";
-import { secureMovieTokenInfo } from "entities/SMEntity";
-import client from ".";
 
 export const GET_SECURE_MOVIE_TOKENS = gql(`
-   query getSecureMovieTokens($skip: Int, $first: Int) {
-    id
-    movieContract {
+   query getSecureMovieTokens($skip: Int, $first: Int, $orderDirection: String, $orderBy: String) {
+    secureMovieTokens(skip: $skip, first: $first, orderBy: $orderBy, orderDirection: $orderDirection) {
       id
-      name
-      symbol
-    }
-    movieTokenUri
-    tickets {
-      id
-      name
-      symbol
-      price
-      max
-      duration
+      owner {
+        id
+      }
+      mintTime
+      movieContract {
+        id
+        name
+        symbol
+      }
+      movieTokenUri
+      tickets {
+        id
+        name
+        symbol
+        price
+        max
+        duration
+      }
     }
    }
  `);
-
-export function getSecureMovieTicketTokens() {
-  return client.query<secureMovieTokenInfo>({
-    query: GET_SECURE_MOVIE_TOKENS,
-    variables: {
-      skip: 0,
-      first: 50,
-    },
-  });
-}

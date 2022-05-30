@@ -1,3 +1,11 @@
+/*
+ * @Author: pony@diynova.com
+ * @Date: 2022-05-30 23:37:32
+ * @LastEditors: pony@diynova.com
+ * @LastEditTime: 2022-05-31 00:05:56
+ * @FilePath: /secure-movie/src/entities/SMEntity.ts
+ * @Description:
+ */
 export class MovieContract {
   id: string;
   name: string;
@@ -25,6 +33,7 @@ export class MovieToken {
 
 export class SMToken {
   id: string;
+  mintTime: string;
   movieContract: MovieContract;
   movieTokenUri: string;
   tickets: Tickets;
@@ -38,7 +47,10 @@ export class SMTicketToken {
   movieToken: MovieToken;
 }
 
-export class secureMovieInfo {
-  secureMovieTicketTokens: Array<SMTicketToken>;
+export class SecureMovieInfo {
   secureMovieTokens: Array<SMToken>;
+}
+
+export class SecureMovieTicketTokensInfo {
+  secureMovieTicketTokens: Array<SMTicketToken>;
 }
