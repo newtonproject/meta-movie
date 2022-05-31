@@ -1,20 +1,41 @@
 import { useQuery } from "@apollo/client";
-import { parseEther } from "@ethersproject/units";
 import { useWeb3React } from "@web3-react/core";
+import { pageSize, POLLING_INTERVAL } from "constant";
+import { SecureMovieInfo, SMToken } from "entities/SMEntity";
 // import { POLLING_INTERVAL } from "constant/connectors";
-import useBlock from "../../hooks/useBlock";
-import { useFlowerContract } from "../../hooks/useContract";
-import React, { useRef, useState } from "react";
-import {
-  getBlockUrl,
-  hexAddress2NewAddress,
-  shortAddress,
-} from "../../utils/NewChainUtils";
-import transactor from "../../components/transactor";
+import React, { useState } from "react";
+import { GET_SECURE_MOVIE_TOKENS } from "services/graph/querySMTokens";
 
 export default function MovieMine() {
-  const { library } = useWeb3React();
+  const { library, account } = useWeb3React();
   const [tabSelected, setTabSelected] = useState(0);
+  const [secureMovieInfos, setSecureMovieInfos] = useState<Array<SMToken>>();
+
+  const { loading, error, data, fetchMore } = useQuery<SecureMovieInfo>(
+    GET_SECURE_MOVIE_TOKENS,
+    {
+      variables: {
+        skip: 0,
+        first: pageSize,
+        orderBy: "mintTime",
+        orderDirection: "desc",
+        where: { owner: account}
+      },
+      fetchPolicy: "cache-and-network",
+      pollInterval: POLLING_INTERVAL,
+      onCompleted: (data) => {
+        console.log(data);
+        setSecureMovieInfos(data.secureMovieTokens);
+      },
+    }
+  );
+
+  if (loading) {
+    return <>Loading...</>;
+  }
+  if (error) {
+    return <>Error :(</>;
+  }
 
   const item1 = {
     address: "NEW5154...wdWM",
