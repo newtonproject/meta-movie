@@ -6,7 +6,6 @@ body {
   @apply h-screen overflow-hidden;
   @apply flex flex-col items-center;
   @apply static;
-  //   @apply bg-red-500;
 
   .content {
     @apply w-[375px] h-full;
@@ -48,7 +47,7 @@ body {
           @apply w-5 h-5;
         }
         .address {
-          @apply font-normal text-sm px-2 text-gray999;
+          @apply font-normal text-xs px-2 text-gray999;
         }
       }
 
@@ -94,57 +93,49 @@ body {
     .item-container {
       @apply w-[375px] h-full;
       @apply overflow-y-auto;
-      .my-list-item {
-        @apply h-auto w-full mb-10 px-2;
-        @apply flex flex-col;
 
-        .date {
-          @apply text-gray999 text-sm;
-        }
+      .my-item-container {
+        @apply flex flex-row mt-4;
 
-        .item-container {
-          @apply flex flex-row mt-4;
-
-          .info {
-            @apply flex flex-col w-full px-2 justify-between;
-            .name {
-              @apply font-normal text-lg text-gray333 leading-5;
-            }
-
-            .token {
-              @apply font-normal text-sm text-gray999;
-            }
+        .info {
+          @apply flex flex-col w-full px-2 justify-between;
+          .name {
+            @apply font-normal text-lg text-gray333 leading-5;
           }
 
-          .cover-container {
-            @apply text-center;
-
-            .cover {
-              @apply w-40 aspect-video object-cover;
-            }
+          .token {
+            @apply font-normal text-sm text-gray999;
           }
         }
 
-        .ticket-container {
-          @apply flex flex-row gap-2 justify-between py-2;
+        .cover-container {
+          @apply text-center h-auto;
 
-          .info {
-            @apply flex flex-col gap-2 text-left w-full;
-            .name {
-              @apply font-normal text-lg text-gray333;
-            }
+          .cover {
+            @apply w-40 aspect-video object-cover;
+          }
+        }
+      }
 
-            .token {
-              @apply font-normal text-xs text-gray999 leading-3;
-            }
+      .ticket-container {
+        @apply flex flex-row gap-2 justify-between py-2;
+
+        .info {
+          @apply flex flex-col gap-2 text-left w-full;
+          .name {
+            @apply font-normal text-lg text-gray333;
           }
 
-          .cover-container {
-            @apply text-center h-full  w-52;
+          .token {
+            @apply font-normal text-xs text-gray999 leading-3 break-all;
+          }
+        }
 
-            .cover {
-              @apply w-[124px] h-auto object-cover;
-            }
+        .cover-container {
+          @apply text-center h-full  w-52;
+
+          .cover {
+            @apply w-[124px] h-auto object-cover;
           }
         }
       }

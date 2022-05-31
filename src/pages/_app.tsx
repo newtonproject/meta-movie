@@ -37,9 +37,12 @@ function MyApp({ Component, pageProps }) {
   return (
     <Fragment>
       <Head>
-        <script type="text/javascript" src="/js/video.min.js" defer/>
-        <script type="text/javascript" src="/js/videojs-http-streaming.min.js" defer/>
-
+        <script type="text/javascript" src="/js/video.min.js" defer />
+        <script
+          type="text/javascript"
+          src="/js/videojs-http-streaming.min.js"
+          defer
+        />
       </Head>
       <ApolloProvider client={client}>
         <Web3ReactProvider getLibrary={getLibrary}>

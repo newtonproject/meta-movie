@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 18:02:42
+ * @LastEditTime: 2022-05-31 18:10:21
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -152,16 +152,29 @@ export default function MovieDetail(props) {
     });
   };
 
+  const handleAddress = () => {
+    if (typeof contractAddress === "string" && contractAddress !== "") {
+      console.log(contractAddress);
+      return (
+        contractAddress.substring(0, 5) +
+        "..." +
+        contractAddress.substring(contractAddress.length - 5)
+      );
+    } else {
+      return contractAddress;
+    }
+  };
+
   return (
     <div className="detail-container">
       <Link href="/" passHref>
-        <img className="back" src="/assets/image/back.png" alt="back" />
+        <img className="back" src="/assets/image/back.png" alt="" />
       </Link>
       <div className="detail">
         {locked ? (
           <>
             <div className="cover-container">
-              <img className="movie-cover" src={cover} alt="cover" />
+              <img className="movie-cover" src={cover} alt="" />
               <div className="cover"></div>
               {active ? (
                 <button
@@ -202,7 +215,9 @@ export default function MovieDetail(props) {
             <div className="content">
               <div className="item">
                 <div className="item-title">Contract Address</div>
-                <div className="item-content">{shortAddress(contractAddress)}</div>
+                <div className="item-content">
+                  {shortAddress(contractAddress)}
+                </div>
               </div>
               <div className="item">
                 <div className="item-title">Token ID</div>
