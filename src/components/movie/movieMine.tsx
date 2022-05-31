@@ -182,7 +182,7 @@ export default function MovieMine() {
         <div className="cover-container">
           <img
             className="cover"
-            src="/assets/image/ticket.png"
+            src={tokenMetaData.tokenImage}
             alt="cover"
             onClick={() => {}}
           />

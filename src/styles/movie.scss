@@ -135,7 +135,7 @@ body {
           @apply text-center h-full  w-52;
 
           .cover {
-            @apply w-[124px] h-auto object-cover;
+            @apply w-[124px] h-16 object-cover;
           }
         }
       }
