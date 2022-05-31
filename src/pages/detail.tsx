@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 11:15:56
+ * @LastEditTime: 2022-05-31 12:53:39
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -140,7 +140,7 @@ export default function MovieDetail(props) {
         {locked ? (
           <>
             <div className="cover-container">
-              <img className="movie-cover" src={coverImage} alt="cover" />
+              <img className="movie-cover" src={coverImage.toString()} alt="cover" />
               <div className="cover"></div>
               {active ? (
                 <button
