@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 01:18:19
+ * @LastEditTime: 2022-05-31 11:21:45
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
  * @Description:
  */
@@ -39,6 +39,7 @@ export default function MovieList() {
         first: pageSize,
         orderBy: "mintTime",
         orderDirection: "desc",
+        where: {}
       },
       fetchPolicy: "cache-and-network",
       pollInterval: POLLING_INTERVAL,
@@ -74,8 +75,6 @@ export default function MovieList() {
     const purchaseTime = ticket.duration / 3600;
     const ticketAddress = ticket.id;
     const owner = hexAddress2NewAddress(movieToken.owner.id, TARGET_CHAINID);
-    console.log(`metadata: ${tokenMetaData}`);
-    console.log(tokenMetaData);
 
     const detailProps = {
       name: tokenMetaData.tokenName,

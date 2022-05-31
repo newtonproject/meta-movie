@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 01:32:53
+ * @LastEditTime: 2022-05-31 11:15:56
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -81,6 +81,7 @@ export default function MovieDetail(props) {
               .then((res) => {
                 console.log(res);
                 if (res.error_code == 1) {
+                  console.log(res.result.secret)
                   setVideoSecret(res.result.secret);
                   setLocked(false);
                 } else {
@@ -107,7 +108,7 @@ export default function MovieDetail(props) {
     fluid: true,
     sources: [
       {
-        src: videoUrl,
+        src: videoUrl + "/output.m3u8",
         type: "application/x-mpegURL",
       },
     ],
