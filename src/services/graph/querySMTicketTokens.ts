@@ -1,11 +1,3 @@
-/*
- * @Author: pony@diynova.com
- * @Date: 2022-05-30 23:37:32
- * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-30 23:51:43
- * @FilePath: /secure-movie/src/services/graph/querySMTicketTokens.ts
- * @Description:
- */
 import { gql } from "@apollo/client";
 
 export const GET_SECURE_MOVIE_TICKET_TOKENS = gql(`
@@ -19,6 +11,7 @@ export const GET_SECURE_MOVIE_TICKET_TOKENS = gql(`
       }
       movieToken {
         id
+        movieTokenId
         movieContract {
           id
           name

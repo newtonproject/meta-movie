@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-30 23:37:32
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 00:35:05
+ * @LastEditTime: 2022-05-31 20:11:47
  * @FilePath: /secure-movie/src/entities/SMEntity.ts
  * @Description:
  */
@@ -19,6 +19,7 @@ export class Tickets {
   price: string;
   max: string;
   duration: string;
+  totalSupply: string;
 }
 
 export class Owner {
@@ -27,6 +28,7 @@ export class Owner {
 
 export class MovieToken {
   id: string;
+  movieTokenId: string;
   movieContract: MovieContract;
   movieTokenUri: string;
 }
@@ -39,6 +41,7 @@ export class SMToken {
   movieTokenUri: string;
   tickets: Tickets;
   owner: Owner;
+  ticketTokens: Array<SMTicketToken>;
 }
 
 export class SMTicketToken {

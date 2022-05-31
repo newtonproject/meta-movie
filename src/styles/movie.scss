@@ -17,7 +17,7 @@ body {
 
     .wallet {
       @apply absolute;
-      @apply top-4 right-4;
+      @apply top-4 right-2;
     }
   }
 
@@ -147,7 +147,7 @@ body {
           @apply text-center h-full  w-52;
 
           .cover {
-            @apply w-[124px] h-auto object-cover;
+            @apply w-[124px] h-16 object-cover;
           }
         }
       }
@@ -193,4 +193,15 @@ body {
       }
     }
   }
+}
+
+.loading {
+  @apply fixed w-full flex z-50;
+  
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
+}
+
+.empty {
+  @apply mx-auto w-auto h-16 mt-36;
 }

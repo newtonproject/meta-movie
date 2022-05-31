@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 11:21:45
+ * @LastEditTime: 2022-05-31 19:51:20
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
  * @Description:
  */
@@ -22,14 +22,22 @@ import { TARGET_CHAINID } from "constant/settings";
 import { useSecureMovieContract } from "hooks/useContract";
 import transactor from "components/transactor";
 import useBalance from "hooks/useBalance";
+import HashLoader from "react-spinners/HashLoader";
+import Loading from "../Loading";
 
 export default function MovieList() {
   const { library, account } = useWeb3React();
   const router = useRouter();
   const secureMovieContract = useSecureMovieContract();
+
   const balance = useBalance(library, account);
 
   const [secureMovieInfos, setSecureMovieInfos] = useState<Array<SMToken>>();
+
+  let ticketWhere = {};
+  if (account) {
+    ticketWhere = { owner: account };
+  }
 
   const { loading, error, data, fetchMore } = useQuery<SecureMovieInfo>(
     GET_SECURE_MOVIE_TOKENS,
@@ -40,22 +48,22 @@ export default function MovieList() {
         orderBy: "mintTime",
         orderDirection: "desc",
         where: {},
+        ticket_where: ticketWhere,
       },
       fetchPolicy: "cache-and-network",
       pollInterval: POLLING_INTERVAL,
       onCompleted: (data) => {
-        console.log(data);
         setSecureMovieInfos(data.secureMovieTokens);
       },
     }
   );
 
-  if (loading) {
-    return <>Loading...</>;
-  }
-  if (error) {
-    return <>Error :(</>;
-  }
+  // if (loading) {
+  //   return <>Loading...</>;
+  // }
+  // if (error) {
+  //   return <>Error :(</>;
+  // }
 
   function openMovieDetail(detailProps) {
     router.push({
@@ -71,10 +79,15 @@ export default function MovieList() {
     const tokenMetaData = useTokenDescription(item.movieTokenUri);
     const ticket = movieToken.tickets[0];
     const price = formatEther(ticket.price);
-    const maxTicketNumber = ticket.max;
+    const maxTicketNumber = parseInt(ticket.max) - parseInt(ticket.totalSupply);
     const purchaseTime = ticket.duration / 3600;
     const ticketAddress = ticket.id;
     const owner = hexAddress2NewAddress(movieToken.owner.id, TARGET_CHAINID);
+    const isOwner = account
+      ? movieToken.owner.id === account.toLowerCase()
+      : false;
+    const hasTicket = movieToken.ticketTokens.length > 0;
+    const canView = isOwner || hasTicket;
 
     const detailProps = {
       name: tokenMetaData.tokenName,
@@ -85,7 +98,7 @@ export default function MovieList() {
       ),
       tokenId: movieToken.movieTokenId,
       tokenStandard: "EVT",
-      failureTime: "2020 12 31",
+      failureTime: "-",
       videoUrl: tokenMetaData.tokenVideo,
       coverImage: tokenMetaData.tokenImage,
     };
@@ -113,13 +126,13 @@ export default function MovieList() {
         <div className="cover-container">
           <img
             className="cover"
-            src={tokenMetaData.tokenImage}
-            alt="cover"
+            src={tokenMetaData.tokenImage === '' ? "/assets/image/video_placeholder.png" : tokenMetaData.tokenImage}
+            alt=""
             onClick={() => {
-              openMovieDetail(detailProps);
+              // openMovieDetail(detailProps);
             }}
           />
-          <button className="preview">Trailer</button>
+          {/* <button className="preview">Trailer</button> */}
         </div>
         <span className="price">{price}</span>
         <div className="desc">
@@ -134,15 +147,28 @@ export default function MovieList() {
           />
         </div>
 
-        <div className="panel">
+        <div className="panel" hidden={maxTicketNumber<=0}>
           {/* <Link href="/mint" passHref> */}
-          <button
-            onClick={() => {
-              buyTickets();
-            }}
-          >
-            Buy
-          </button>
+          {canView ? (
+            <>
+              <button
+                onClick={() => {
+                  openMovieDetail(detailProps);
+                }}
+              >
+                View
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => {
+                buyTickets();
+              }}
+            >
+              Buy
+            </button>
+          )}
+
           {/* </Link> */}
           <div className="panel-info">
             <span className="bold">{maxTicketNumber} times</span>
@@ -161,11 +187,19 @@ export default function MovieList() {
   }
 
   return (
+    <>
     <div className="movie-container">
+      {/* {
+        loading && <HashLoader color={"#fff000"} loading={true} css={override} size={50} />
+      } */}
+      
       {secureMovieInfos &&
         secureMovieInfos.map((item, indexed) => {
           return <MovieListItem key={indexed} item={item} />;
         })}
     </div>
+    <Loading loading={loading}/>
+    
+    </>
   );
 }

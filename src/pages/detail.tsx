@@ -234,10 +234,10 @@ export default function MovieDetail(props) {
             </div>
           </div>
 
-          <div className="extra">
-            <div className="title">Failure Time</div>
+          {/* <div className="extra">
+            <div className="title">Expiration Time</div>
             <div className="content">{failureTime}</div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
