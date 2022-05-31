@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 12:56:59
+ * @LastEditTime: 2022-05-31 18:08:41
  * @FilePath: /secure-movie/src/pages/_app.tsx
  * @Description:
  */
@@ -36,9 +36,13 @@ function ImportVideo() {
 function MyApp({ Component, pageProps }) {
   return (
     <Fragment>
+      <Head>
+        <script type="text/javascript" src="/js/video.min.js" defer/>
+        <script type="text/javascript" src="/js/videojs-http-streaming.min.js" defer/>
+
+      </Head>
       <ApolloProvider client={client}>
         <Web3ReactProvider getLibrary={getLibrary}>
-          <ImportVideo />
           <HiddenAccount />
           <Component {...pageProps} />
         </Web3ReactProvider>

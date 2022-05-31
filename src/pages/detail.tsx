@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 17:54:38
+ * @LastEditTime: 2022-05-31 18:02:42
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -15,7 +15,7 @@ import { useWeb3React } from "@web3-react/core";
 import { injected } from "constant/connectors";
 import Http from "services/http";
 import { CheckSecretParams } from "model";
-import { newAddress2HexAddress } from "utils/NewChainUtils";
+import { newAddress2HexAddress, shortAddress } from "utils/NewChainUtils";
 import { splitSignature } from "@ethersproject/bytes";
 import { TARGET_CHAINID } from "constant/settings";
 
@@ -37,8 +37,6 @@ export default function MovieDetail(props) {
     videoUrl,
     coverImage,
   } = router.query;
-
-  console.log(router.query);
 
   useEffect(() => {
     if (coverImage) {
@@ -204,7 +202,7 @@ export default function MovieDetail(props) {
             <div className="content">
               <div className="item">
                 <div className="item-title">Contract Address</div>
-                <div className="item-content">{contractAddress}</div>
+                <div className="item-content">{shortAddress(contractAddress)}</div>
               </div>
               <div className="item">
                 <div className="item-title">Token ID</div>
