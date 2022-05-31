@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 11:21:45
+ * @LastEditTime: 2022-05-31 19:43:42
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
  * @Description:
  */
@@ -40,6 +40,7 @@ export default function MovieList() {
         orderBy: "mintTime",
         orderDirection: "desc",
         where: {},
+        ticket_where: { owner: account.toLowerCase() },
       },
       fetchPolicy: "cache-and-network",
       pollInterval: POLLING_INTERVAL,
@@ -75,6 +76,9 @@ export default function MovieList() {
     const purchaseTime = ticket.duration / 3600;
     const ticketAddress = ticket.id;
     const owner = hexAddress2NewAddress(movieToken.owner.id, TARGET_CHAINID);
+    const isOwner = movieToken.owner.id === account.toLowerCase();
+    const hasTicket = movieToken.ticketTokens.length > 0;
+    const canView = isOwner || hasTicket;
 
     const detailProps = {
       name: tokenMetaData.tokenName,
@@ -116,22 +120,35 @@ export default function MovieList() {
             src={tokenMetaData.tokenImage}
             alt="cover"
             onClick={() => {
-              openMovieDetail(detailProps);
+              // openMovieDetail(detailProps);
             }}
           />
-          <button className="preview">Trailor</button>
+          {/* <button className="preview">Trailer</button> */}
         </div>
-        <span className="price">{price}</span>
+        <span className="price">{price} NEW</span>
         <span className="description">{tokenMetaData.tokenDescription}</span>
         <div className="panel">
           {/* <Link href="/mint" passHref> */}
-          <button
-            onClick={() => {
-              buyTickets();
-            }}
-          >
-            Buy
-          </button>
+          {canView ? (
+            <>
+              <button
+                onClick={() => {
+                  openMovieDetail(detailProps);
+                }}
+              >
+                View
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => {
+                buyTickets();
+              }}
+            >
+              Buy
+            </button>
+          )}
+
           {/* </Link> */}
           <div className="panel-info">
             <span className="bold">{maxTicketNumber} times</span>
