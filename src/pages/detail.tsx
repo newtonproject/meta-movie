@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 13:00:10
+ * @LastEditTime: 2022-05-31 17:54:38
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -15,8 +15,9 @@ import { useWeb3React } from "@web3-react/core";
 import { injected } from "constant/connectors";
 import Http from "services/http";
 import { CheckSecretParams } from "model";
-import { getSignatureDetail } from "utils";
 import { newAddress2HexAddress } from "utils/NewChainUtils";
+import { splitSignature } from "@ethersproject/bytes";
+import { TARGET_CHAINID } from "constant/settings";
 
 export default function MovieDetail(props) {
   const router = useRouter();
@@ -36,6 +37,8 @@ export default function MovieDetail(props) {
     videoUrl,
     coverImage,
   } = router.query;
+
+  console.log(router.query);
 
   useEffect(() => {
     if (coverImage) {
@@ -57,38 +60,47 @@ export default function MovieDetail(props) {
 
   function check() {
     try {
-      let message =
-        "timeStamp:" + parseInt((Date.now() / 1000).toString()).toString();
-      let request = {
-        jsonrpc: "2.0",
-        id: 2,
-        method: "personal_sign",
-        params: [message, account],
+      let info = parseInt((Date.now() / 1000).toString()).toString();
+      let message = {
+        domain: {
+          name: "SecureMovie",
+          verifyingContract: "0x0000000000000000000000000000000000000000",
+          version: "1",
+        },
+        message: {
+          timestamp: info,
+        },
+        primaryType: "SignMessage",
+        types: {
+          EIP712Domain: [
+            { name: "name", type: "string" },
+            { name: "version", type: "string" },
+            { name: "verifyingContract", type: "address" },
+          ],
+          SignMessage: [{ name: "timestamp", type: "string" }],
+        },
       };
-      if (
-        library === undefined &&
-        library.provider === undefined &&
-        library.provider.sendAsync === undefined
-      ) {
+
+      if (library === undefined) {
         return;
       } else {
-        library.provider.sendAsync(request, (error, response) => {
-          if (response) {
-            const { r, s } = getSignatureDetail(response.result);
+        library
+          .send("eth_signTypedData_v4", [account, JSON.stringify(message)])
+          .then(splitSignature)
+          .then((signature) => {
             const params = new CheckSecretParams();
             params.token_id = tokenId.toString();
             params.contract_address =
               newAddress2HexAddress(contractAddress).toString();
-            params.sign_message = message;
-            params.sign_r = r;
-            params.sign_s = s;
-            console.log(params);
+            params.sign_message = JSON.stringify(message);
+            params.sign_r = signature.r;
+            params.sign_s = signature.s;
+            params.sign_v = signature.v;
             Http.getInstance()
               .secretCheck(params)
               .then((res) => {
                 console.log(res);
                 if (res.error_code == 1) {
-                  console.log(res.result.secret);
                   setVideoSecret(res.result.secret);
                   setLocked(false);
                 } else {
@@ -98,10 +110,13 @@ export default function MovieDetail(props) {
               .catch((error) => {
                 console.log(error);
               });
-          } else {
-            console.log("get balance error:" + error);
-          }
-        });
+          })
+          .catch((error) => {
+            // for all errors other than 4001 (EIP-1193 user rejected request), fall back to manual approve
+            if (error?.code !== 4001) {
+              console.log(error);
+            }
+          });
       }
     } catch (error) {
       console.error(error);
