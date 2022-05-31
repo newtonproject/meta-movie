@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 17:13:59
+ * @LastEditTime: 2022-05-31 17:54:38
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -61,9 +61,8 @@ export default function MovieDetail(props) {
   function check() {
     try {
       let info = parseInt((Date.now() / 1000).toString()).toString();
-      let msgParams = {
+      let message = {
         domain: {
-          chainId: TARGET_CHAINID,
           name: "SecureMovie",
           verifyingContract: "0x0000000000000000000000000000000000000000",
           version: "1",
@@ -76,14 +75,11 @@ export default function MovieDetail(props) {
           EIP712Domain: [
             { name: "name", type: "string" },
             { name: "version", type: "string" },
-            { name: "chainId", type: "uint256" },
             { name: "verifyingContract", type: "address" },
           ],
           SignMessage: [{ name: "timestamp", type: "string" }],
         },
       };
-
-      let message = msgParams;
 
       if (library === undefined) {
         return;
@@ -92,7 +88,6 @@ export default function MovieDetail(props) {
           .send("eth_signTypedData_v4", [account, JSON.stringify(message)])
           .then(splitSignature)
           .then((signature) => {
-            console.log(JSON.stringify(signature));
             const params = new CheckSecretParams();
             params.token_id = tokenId.toString();
             params.contract_address =
@@ -100,13 +95,12 @@ export default function MovieDetail(props) {
             params.sign_message = JSON.stringify(message);
             params.sign_r = signature.r;
             params.sign_s = signature.s;
-            console.log(params);
+            params.sign_v = signature.v;
             Http.getInstance()
               .secretCheck(params)
               .then((res) => {
                 console.log(res);
                 if (res.error_code == 1) {
-                  console.log(res.result.secret);
                   setVideoSecret(res.result.secret);
                   setLocked(false);
                 } else {
@@ -125,7 +119,6 @@ export default function MovieDetail(props) {
           });
       }
     } catch (error) {
-      console.log("there have no response 2");
       console.error(error);
     }
   }
