@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 15:05:52
+ * @LastEditTime: 2022-05-31 15:27:09
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -37,6 +37,9 @@ export default function MovieDetail(props) {
     coverImage,
   } = router.query;
 
+  console.log(router.query);
+  
+
   useEffect(() => {
     if(coverImage) {
       setCover(coverImage.toString())
@@ -58,7 +61,7 @@ export default function MovieDetail(props) {
   function check() {
     try {
       let info = "timeStamp:" + parseInt((Date.now() / 1000).toString()).toString();
-      let message = new Buffer(info).toString("hex");
+      let message = info;
       let request = {
         jsonrpc: "2.0",
         id: 2,
