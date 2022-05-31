@@ -14,6 +14,7 @@ import { useTokenDescription } from "hooks/useTokenDescription";
 import { formatEther, parseEther } from "@ethersproject/units";
 import { hexAddress2NewAddress } from "utils/NewChainUtils";
 import { TARGET_CHAINID } from "constant/settings";
+import { useRouter } from "next/router";
 
 export default function MovieMine() {
   const { library, account } = useWeb3React();
@@ -82,6 +83,7 @@ export default function MovieMine() {
 
   function MovieListItem(props) {
     const { item } = props;
+    const router = useRouter();
     const movieToken = item as SMToken;
     const tokenMetaData = useTokenDescription(item.movieTokenUri);
     const ticket = movieToken.tickets[0];
@@ -90,12 +92,35 @@ export default function MovieMine() {
     const purchaseTime = ticket.duration / 3600;
     const ticketAddress = ticket.id;
     const owner = hexAddress2NewAddress(movieToken.owner.id, TARGET_CHAINID);
-    console.log(item);
-    console.log(tokenMetaData);
-    console.log("11111");
+
+    const detailProps = {
+      name: tokenMetaData.tokenName,
+      description: tokenMetaData.tokenDescription,
+      contractAddress: hexAddress2NewAddress(
+        movieToken.movieContract.id,
+        TARGET_CHAINID
+      ),
+      tokenId: movieToken.movieTokenId,
+      tokenStandard: "EVT",
+      failureTime: "2020 12 31",
+      videoUrl: tokenMetaData.tokenVideo,
+      coverImage: tokenMetaData.tokenImage,
+    };
+
+    function openMovieDetail() {
+      router.push({
+        pathname: "/detail",
+        query: detailProps,
+      });
+    }
 
     return (
-      <div className="my-item-container">
+      <div
+        className="my-item-container"
+        onClick={() => {
+          openMovieDetail();
+        }}
+      >
         <div className="cover-container">
           <img
             className="cover"
@@ -114,11 +139,41 @@ export default function MovieMine() {
 
   function TicketItem(props) {
     const { item } = props;
-    const movieToken = item as SMTicketToken;
-    const tokenMetaData = useTokenDescription(item.movieToken.movieTokenUri);
+    const router = useRouter();
+    const ticketToken = item as SMTicketToken;
+    const tokenMetaData = useTokenDescription(
+      ticketToken.movieToken.movieTokenUri
+    );
+
+    const detailProps = {
+      name: tokenMetaData.tokenName,
+      description: tokenMetaData.tokenDescription,
+      contractAddress: hexAddress2NewAddress(
+        ticketToken.movieToken.movieContract.id,
+        TARGET_CHAINID
+      ),
+      tokenId: ticketToken.movieToken.movieTokenId,
+      tokenStandard: "EVT",
+      failureTime: "2020 12 31",
+      videoUrl: tokenMetaData.tokenVideo,
+      coverImage: tokenMetaData.tokenImage,
+    };
+
+    function openMovieDetail() {
+      router.push({
+        pathname: "/detail",
+        query: detailProps,
+      });
+    }
 
     return (
-      <div className="ticket-container" key={item.toString()}>
+      <div
+        className="ticket-container"
+        key={item.toString()}
+        onClick={() => {
+          openMovieDetail();
+        }}
+      >
         <div className="info">
           <span className="name">{tokenMetaData.tokenName}</span>
           <div className="token">Token id: {item.id}</div>
@@ -135,9 +190,6 @@ export default function MovieMine() {
       </div>
     );
   }
-
-  console.log("account is: " + account);
-  console.log(account.toLowerCase());
 
   return (
     <div className="mine-container">
