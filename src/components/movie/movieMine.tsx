@@ -77,7 +77,7 @@ export default function MovieMine() {
         <span className="date">{date}</span>
         {data.map((item) => {
           return (
-            <div className="item-container">
+            <div className="item-container" key={item.toString()}>
               <div className="cover-container">
                 <img
                   className="cover"
@@ -104,7 +104,7 @@ export default function MovieMine() {
         <span className="date">{date}</span>
         {data.map((item) => {
           return (
-            <div className="ticket-container">
+            <div className="ticket-container" key={item.toString()}>
               <div className="info">
                 <span className="name">{item.name}</span>
                 <span className="token">Token id: {item.token}</span>
@@ -153,11 +153,11 @@ export default function MovieMine() {
       <div className="item-container">
         {tabSelected == 0 ? (
           Object.keys(json).map((date) => {
-            return <MovieListItem date={date} data={json[date]} />;
+            return <MovieListItem date={date} data={json[date]} key={date.toString()}/>;
           })
         ) : tabSelected == 1 ? (
           Object.keys(json2).map((date) => {
-            return <TicketItem date={date} data={json[date]} />;
+            return <TicketItem date={date} data={json[date]} key={date.toString()}/>;
           })
         ) : (
           <></>
