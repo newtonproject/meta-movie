@@ -16,7 +16,6 @@ import Account from "../account";
 export default function MovieHome() {
   const { library, account } = useWeb3React();
   const [tabSelected, setTabSelected] = useState(0);
- 
 
   return (
     <div className="movie">

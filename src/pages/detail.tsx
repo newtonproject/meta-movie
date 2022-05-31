@@ -50,7 +50,8 @@ export default function MovieDetail(props) {
 
   function check() {
     try {
-      let message = "timeStamp:" + parseInt((Date.now() / 1000).toString()).toString();
+      let message =
+        "timeStamp:" + parseInt((Date.now() / 1000).toString()).toString();
       let request = {
         jsonrpc: "2.0",
         id: 2,
@@ -130,6 +131,19 @@ export default function MovieDetail(props) {
     });
   };
 
+  const handleAddress = () => {
+    if (typeof contractAddress === "string" && contractAddress !== "") {
+      console.log(contractAddress);
+      return (
+        contractAddress.substring(0, 5) +
+        "..." +
+        contractAddress.substring(contractAddress.length - 5)
+      );
+    } else {
+      return contractAddress;
+    }
+  };
+
   return (
     <div className="detail-container">
       <Link href="/" passHref>
@@ -180,7 +194,7 @@ export default function MovieDetail(props) {
             <div className="content">
               <div className="item">
                 <div className="item-title">Contract Address</div>
-                <div className="item-content">{contractAddress}</div>
+                <div className="item-content">{handleAddress()}</div>
               </div>
               <div className="item">
                 <div className="item-title">Token ID</div>

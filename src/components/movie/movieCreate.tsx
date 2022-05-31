@@ -23,6 +23,7 @@ export default function MovieCreate() {
   // evt information
   const [nftName, setNftName] = useState("");
   const [nftDesc, setNftDesc] = useState("");
+  const [nftPurchases, setNftPurchases] = useState("");
   const [nftPrice, setNftPrice] = useState("");
 
   const { account } = useWeb3React();
@@ -85,7 +86,7 @@ export default function MovieCreate() {
         console.log("tokenURI:", tokenURI);
         const toAddress = account;
         const pricePerTicket = parseEther(nftPrice);
-        const maxNumberOfTickets = 30; // max 30 ticket
+        const maxNumberOfTickets = nftPurchases; // max 30 ticket
         const duration = 86400; // 24 hours
         transactor(
           secureMovieContract.createSecureMovieAndTickets(
@@ -151,6 +152,16 @@ export default function MovieCreate() {
         <div className="content">Newton</div>
         <div className="title">Valid time</div>
         <div className="content">24 hours</div>
+        <div className="title">Purchases</div>
+        <div className="input">
+          <input
+            className="normal-input"
+            placeholder="The video's Purchases"
+            onChange={(e) => {
+              setNftPurchases(e.target.value);
+            }}
+          />
+        </div>
         <div className="title">Price</div>
         <div className="input unit">
           <input
