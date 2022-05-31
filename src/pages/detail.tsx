@@ -2,12 +2,12 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 12:53:39
+ * @LastEditTime: 2022-05-31 13:00:10
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import VideoComponent from "components/movie/video";
@@ -24,6 +24,7 @@ export default function MovieDetail(props) {
   const { library, account, active, activate } = useWeb3React();
   const [locked, setLocked] = useState(true);
   const [videoSecret, setVideoSecret] = useState("");
+  const [cover, setCover] = useState("");
 
   const {
     name,
@@ -35,6 +36,12 @@ export default function MovieDetail(props) {
     videoUrl,
     coverImage,
   } = router.query;
+
+  useEffect(() => {
+    if(coverImage) {
+      setCover(coverImage.toString())
+    }
+  })
 
   function encryptionCallback(key) {
     var data = Buffer.from(videoSecret.toString());
@@ -140,7 +147,7 @@ export default function MovieDetail(props) {
         {locked ? (
           <>
             <div className="cover-container">
-              <img className="movie-cover" src={coverImage.toString()} alt="cover" />
+              <img className="movie-cover" src={cover} alt="cover" />
               <div className="cover"></div>
               {active ? (
                 <button
