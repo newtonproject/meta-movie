@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 15:27:09
+ * @LastEditTime: 2022-05-31 15:51:19
  * @FilePath: /secure-movie/src/pages/detail.tsx
  * @Description:
  */
@@ -41,6 +41,11 @@ export default function MovieDetail(props) {
   
 
   useEffect(() => {
+    //@ts-ignore
+    if (videojs.getPlayer("videoJSPlayer")) {
+      //@ts-ignore
+      videojs("videoJSPlayer").dispose();
+    }
     if(coverImage) {
       setCover(coverImage.toString())
     }
