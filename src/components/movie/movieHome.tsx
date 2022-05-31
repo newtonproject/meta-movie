@@ -20,6 +20,7 @@ export default function MovieHome() {
   return (
     <div className="movie">
       <div className="content">
+        <img className="icon" src="/assets/image/logo.png" alt="" />
         <div className="wallet">
           <Account />
         </div>

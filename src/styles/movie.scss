@@ -11,6 +11,10 @@ body {
     @apply w-[375px] h-full;
     @apply relative;
 
+    .icon {
+      @apply w-8 h-8 relative top-5 left-2;
+    }
+
     .wallet {
       @apply absolute;
       @apply top-4 right-4;
@@ -38,9 +42,17 @@ body {
         @apply font-semibold text-2xl px-2 mt-4;
       }
 
-      .description {
-        @apply font-normal text-sm text-black33 mt-4 px-2;
+      .desc {
+        @apply flex w-full justify-between items-start mt-4 px-2;
+
+        .description {
+          @apply font-normal text-sm text-black33;
+        }
+        .next {
+          @apply w-5 h-5 mr-2;
+        }
       }
+
       .user {
         @apply flex items-center mt-2 ml-2;
         .user-icon {
@@ -60,7 +72,7 @@ body {
 
         .preview {
           @apply rounded-2xl w-28 h-8 absolute bottom-24;
-          @apply text-white bg-black/50;
+          @apply text-white bg-black/50 text-2xl text-font22xl;
           left: calc(50% - 3.5rem);
         }
       }
@@ -69,7 +81,7 @@ body {
 
         button {
           @apply bg-reded font-bold text-white text-xl py-1 rounded-md;
-          width: calc(100% - 160px);
+          width: calc(100% - 130px);
         }
 
         .panel-info {

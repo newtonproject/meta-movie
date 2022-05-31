@@ -119,10 +119,21 @@ export default function MovieList() {
               openMovieDetail(detailProps);
             }}
           />
-          <button className="preview">Trailor</button>
+          <button className="preview">Trailer</button>
         </div>
         <span className="price">{price}</span>
-        <span className="description">{tokenMetaData.tokenDescription}</span>
+        <div className="desc">
+          <span className="description">{tokenMetaData.tokenDescription}</span>
+          <img
+            className="next"
+            src="/assets/image/details.png"
+            alt=""
+            onClick={() => {
+              openMovieDetail(detailProps);
+            }}
+          />
+        </div>
+
         <div className="panel">
           {/* <Link href="/mint" passHref> */}
           <button
