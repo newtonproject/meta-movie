@@ -118,7 +118,7 @@ export default function MovieCreate() {
                 <img
                   className="cover-svg"
                   src="/assets/image/upload.png"
-                  alt="cover"
+                  alt=""
                   onClick={() => {}}
                 />
                 <div className="cover-label">upload a video file</div>

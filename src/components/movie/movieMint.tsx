@@ -17,19 +17,19 @@ export default function MovieMint() {
     <div className="mint">
       <div className="content">
         <Link href="/" passHref>
-          <img className="back" src="/assets/image/back.png" alt="back" />
+          <img className="back" src="/assets/image/back.png" alt="" />
         </Link>
         <div className="cover-container">
           <img
             className="cover"
             src="/assets/image/cover1.png"
-            alt="cover"
+            alt=""
             onClick={() => {}}
           />
           <img
             className="preview"
             src="/assets/image/play.png"
-            alt="cover"
+            alt=""
             onClick={() => {}}
           />
         </div>

@@ -32,12 +32,12 @@ export default function MovieHome() {
             setTabSelected(0);
           }}
         >
-          <img className="tab-icon" src="/assets/image/home.png" alt="home" />
+          <img className="tab-icon" src="/assets/image/home.png" alt="" />
           <span>Home</span>
         </div>
         <div className="tab">
           <Link href="/create" passHref>
-            <img className="tab-center" src="/assets/image/add.png" alt="add" />
+            <img className="tab-center" src="/assets/image/add.png" alt="" />
           </Link>
         </div>
         <div
@@ -46,7 +46,7 @@ export default function MovieHome() {
             setTabSelected(1);
           }}
         >
-          <img className="tab-icon" src="/assets/image/mine.png" alt="mine" />
+          <img className="tab-icon" src="/assets/image/mine.png" alt="" />
           <span>Mine</span>
         </div>
       </div>

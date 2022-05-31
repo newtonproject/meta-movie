@@ -38,10 +38,10 @@ export default function MovieDetail(props) {
   } = router.query;
 
   useEffect(() => {
-    if(coverImage) {
-      setCover(coverImage.toString())
+    if (coverImage) {
+      setCover(coverImage.toString());
     }
-  })
+  });
 
   function encryptionCallback(key) {
     var data = Buffer.from(videoSecret.toString());
@@ -88,7 +88,7 @@ export default function MovieDetail(props) {
               .then((res) => {
                 console.log(res);
                 if (res.error_code == 1) {
-                  console.log(res.result.secret)
+                  console.log(res.result.secret);
                   setVideoSecret(res.result.secret);
                   setLocked(false);
                 } else {
@@ -155,13 +155,13 @@ export default function MovieDetail(props) {
   return (
     <div className="detail-container">
       <Link href="/" passHref>
-        <img className="back" src="/assets/image/back.png" alt="back" />
+        <img className="back" src="/assets/image/back.png" alt="" />
       </Link>
       <div className="detail">
         {locked ? (
           <>
             <div className="cover-container">
-              <img className="movie-cover" src={cover} alt="cover" />
+              <img className="movie-cover" src={cover} alt="" />
               <div className="cover"></div>
               {active ? (
                 <button

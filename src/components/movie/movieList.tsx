@@ -39,7 +39,7 @@ export default function MovieList() {
         first: pageSize,
         orderBy: "mintTime",
         orderDirection: "desc",
-        where: {}
+        where: {},
       },
       fetchPolicy: "cache-and-network",
       pollInterval: POLLING_INTERVAL,
@@ -119,7 +119,7 @@ export default function MovieList() {
               openMovieDetail(detailProps);
             }}
           />
-          <button className="preview">Preview</button>
+          <button className="preview">Trailor</button>
         </div>
         <span className="price">{price}</span>
         <span className="description">{tokenMetaData.tokenDescription}</span>
@@ -142,7 +142,7 @@ export default function MovieList() {
           Valid time after purchase: {purchaseTime} hour
         </span>
         <div className="user">
-          <img className="user-icon" src="/assets/image/user.png" alt="user" />
+          <img className="user-icon" src="/assets/image/user.png" alt="" />
           <span className="address">{owner}</span>
         </div>
       </div>
