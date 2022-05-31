@@ -19,7 +19,7 @@ export default function MovieMine() {
         first: pageSize,
         orderBy: "mintTime",
         orderDirection: "desc",
-        where: { owner: account}
+        where: { owner: account },
       },
       fetchPolicy: "cache-and-network",
       pollInterval: POLLING_INTERVAL,
@@ -153,11 +153,19 @@ export default function MovieMine() {
       <div className="item-container">
         {tabSelected == 0 ? (
           Object.keys(json).map((date) => {
-            return <MovieListItem date={date} data={json[date]} key={date.toString()}/>;
+            return (
+              <MovieListItem
+                date={date}
+                data={json[date]}
+                key={date.toString()}
+              />
+            );
           })
         ) : tabSelected == 1 ? (
           Object.keys(json2).map((date) => {
-            return <TicketItem date={date} data={json[date]} key={date.toString()}/>;
+            return (
+              <TicketItem date={date} data={json[date]} key={date.toString()} />
+            );
           })
         ) : (
           <></>

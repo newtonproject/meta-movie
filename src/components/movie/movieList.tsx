@@ -39,7 +39,7 @@ export default function MovieList() {
         first: pageSize,
         orderBy: "mintTime",
         orderDirection: "desc",
-        where: {}
+        where: {},
       },
       fetchPolicy: "cache-and-network",
       pollInterval: POLLING_INTERVAL,

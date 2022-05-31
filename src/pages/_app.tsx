@@ -25,10 +25,12 @@ import { Fragment } from "react";
 import { HiddenAccount } from "components/account";
 
 function ImportVideo() {
-  return <>
-  <Script src="/js/video.min.js"></Script>
-  <Script src="/js/videojs-http-streaming.min.js"></Script>
-  </>
+  return (
+    <>
+      <Script src="/js/video.min.js"></Script>
+      <Script src="/js/videojs-http-streaming.min.js"></Script>
+    </>
+  );
 }
 
 function MyApp({ Component, pageProps }) {
@@ -36,7 +38,7 @@ function MyApp({ Component, pageProps }) {
     <Fragment>
       <ApolloProvider client={client}>
         <Web3ReactProvider getLibrary={getLibrary}>
-          <ImportVideo/>
+          <ImportVideo />
           <HiddenAccount />
           <Component {...pageProps} />
         </Web3ReactProvider>
