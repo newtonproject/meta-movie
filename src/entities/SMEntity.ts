@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-30 23:37:32
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 19:41:14
+ * @LastEditTime: 2022-05-31 19:48:34
  * @FilePath: /secure-movie/src/entities/SMEntity.ts
  * @Description:
  */
@@ -19,6 +19,7 @@ export class Tickets {
   price: string;
   max: string;
   duration: string;
+  totalSupply: string;
 }
 
 export class Owner {

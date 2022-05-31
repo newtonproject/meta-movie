@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-30 23:37:32
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 19:29:49
+ * @LastEditTime: 2022-05-31 19:48:06
  * @FilePath: /secure-movie/src/services/graph/querySMTokens.ts
  * @Description:
  */
@@ -30,6 +30,7 @@ export const GET_SECURE_MOVIE_TOKENS = gql(`
         price
         max
         duration
+        totalSupply
       }
       ticketTokens(where: $ticket_where) {
         id

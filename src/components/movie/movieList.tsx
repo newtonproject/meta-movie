@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-26 14:21:34
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 19:43:42
+ * @LastEditTime: 2022-05-31 19:51:20
  * @FilePath: /secure-movie/src/components/movie/movieList.tsx
  * @Description:
  */
@@ -27,9 +27,15 @@ export default function MovieList() {
   const { library, account } = useWeb3React();
   const router = useRouter();
   const secureMovieContract = useSecureMovieContract();
+
   const balance = useBalance(library, account);
 
   const [secureMovieInfos, setSecureMovieInfos] = useState<Array<SMToken>>();
+
+  let ticketWhere = {};
+  if (account) {
+    ticketWhere = { owner: account };
+  }
 
   const { loading, error, data, fetchMore } = useQuery<SecureMovieInfo>(
     GET_SECURE_MOVIE_TOKENS,
@@ -40,12 +46,11 @@ export default function MovieList() {
         orderBy: "mintTime",
         orderDirection: "desc",
         where: {},
-        ticket_where: { owner: account.toLowerCase() },
+        ticket_where: ticketWhere,
       },
       fetchPolicy: "cache-and-network",
       pollInterval: POLLING_INTERVAL,
       onCompleted: (data) => {
-        console.log(data);
         setSecureMovieInfos(data.secureMovieTokens);
       },
     }
@@ -72,11 +77,13 @@ export default function MovieList() {
     const tokenMetaData = useTokenDescription(item.movieTokenUri);
     const ticket = movieToken.tickets[0];
     const price = formatEther(ticket.price);
-    const maxTicketNumber = ticket.max;
+    const maxTicketNumber = parseInt(ticket.max) - parseInt(ticket.totalSupply);
     const purchaseTime = ticket.duration / 3600;
     const ticketAddress = ticket.id;
     const owner = hexAddress2NewAddress(movieToken.owner.id, TARGET_CHAINID);
-    const isOwner = movieToken.owner.id === account.toLowerCase();
+    const isOwner = account
+      ? movieToken.owner.id === account.toLowerCase()
+      : false;
     const hasTicket = movieToken.ticketTokens.length > 0;
     const canView = isOwner || hasTicket;
 
