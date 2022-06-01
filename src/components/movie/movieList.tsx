@@ -132,7 +132,7 @@ export default function MovieList() {
             className="cover"
             src={
               tokenMetaData.tokenImage === ""
-                ? "/assets/image/video_placeholder.png"
+                ? "/assets/image/video_placeholder.jpg"
                 : tokenMetaData.tokenImage
             }
             alt=""
