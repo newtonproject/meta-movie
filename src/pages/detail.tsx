@@ -168,7 +168,7 @@ export default function MovieDetail(props) {
   return (
     <div className="detail-container">
       <Link href="/" passHref>
-        <img className="back" src="/assets/image/back.png" alt="" />
+        <img className="back" src="/assets/image/back_white.png" alt="" />
       </Link>
       <div className="detail">
         {locked ? (
