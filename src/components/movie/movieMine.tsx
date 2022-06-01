@@ -181,6 +181,23 @@ export default function MovieMine() {
       });
     }
 
+    function getTime() {
+      let now = new Date(Number(item.endTime) * 1000),
+        y = now.getFullYear(),
+        m = now.getMonth() + 1,
+        d = now.getDate();
+
+      return (
+        y +
+        "-" +
+        (m < 10 ? "0" + m : m) +
+        "-" +
+        (d < 10 ? "0" + d : d) +
+        " " +
+        now.toTimeString().substring(0, 8)
+      );
+    }
+
     return (
       <div
         className="ticket-container"
@@ -192,7 +209,7 @@ export default function MovieMine() {
         <div className="info">
           <span className="name">{tokenMetaData.tokenName}</span>
           <div className="token">Token id: {item.id}</div>
-          <span className="token">Expiration time: {item.endTime}</span>
+          <span className="token">Expiration time: {getTime()}</span>
         </div>
         <div className="cover-container">
           <img
