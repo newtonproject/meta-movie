@@ -48,8 +48,13 @@ export default function MovieMine() {
           secureMovieInfos.map((item, indexed) => {
             return <MovieListItem key={indexed} item={item} />;
           })}
-          <Loading loading={loading} />
-          <img className="empty" src="/assets/image/empty.png" alt="" hidden={(secureMovieInfos&&secureMovieInfos.length>0)}/>
+        <Loading loading={loading} />
+        <img
+          className="empty"
+          src="/assets/image/empty.png"
+          alt=""
+          hidden={secureMovieInfos && secureMovieInfos.length > 0}
+        />
       </>
     );
   }
@@ -81,7 +86,12 @@ export default function MovieMine() {
             return <TicketItem key={indexed} item={item} />;
           })}
         <Loading loading={loading} />
-        <img className="empty" src="/assets/image/empty.png" alt="" hidden={(secureMovieTicketInfos&&secureMovieTicketInfos.length>0)}/>
+        <img
+          className="empty"
+          src="/assets/image/empty.png"
+          alt=""
+          hidden={secureMovieTicketInfos && secureMovieTicketInfos.length > 0}
+        />
       </>
     );
   }
