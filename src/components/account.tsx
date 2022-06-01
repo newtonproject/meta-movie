@@ -66,6 +66,13 @@ export default function Account() {
   useInactiveListener(!triedEager || !!activatingConnector);
 
   useEffect(() => {
+    activate(injected)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined);
     }
