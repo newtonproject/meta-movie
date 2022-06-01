@@ -22,7 +22,7 @@ body {
   }
 
   .movie-container {
-    @apply w-[375px] mt-16;
+    @apply w-[375px] mt-10;
     @apply overflow-y-auto;
     height: calc(100% - 140px);
 
@@ -47,6 +47,10 @@ body {
 
         .description {
           @apply font-normal text-sm text-black33;
+          @apply overflow-ellipsis overflow-hidden max-h-10;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
         }
         .next {
           @apply w-5 h-5 mr-2 cursor-pointer;

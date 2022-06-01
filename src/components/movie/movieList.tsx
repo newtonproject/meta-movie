@@ -102,6 +102,9 @@ export default function MovieList() {
       failureTime: "-",
       videoUrl: tokenMetaData.tokenVideo,
       coverImage: tokenMetaData.tokenImage,
+      hasTicket: hasTicket,
+      price: ticket.price,
+      ticketAddress: ticketAddress
     };
 
     // todo: has permission for buy ? view? owner?

@@ -18,6 +18,10 @@ import { CheckSecretParams } from "model";
 import { newAddress2HexAddress, shortAddress } from "utils/NewChainUtils";
 import { splitSignature } from "@ethersproject/bytes";
 import { TARGET_CHAINID } from "constant/settings";
+import { formatEther, parseEther } from "@ethersproject/units";
+import { useSecureMovieContract } from "hooks/useContract";
+import transactor from "components/transactor";
+import { Button, Upload, UploadProps, message } from "antd";
 
 export default function MovieDetail(props) {
   const router = useRouter();
@@ -26,6 +30,7 @@ export default function MovieDetail(props) {
   const [locked, setLocked] = useState(true);
   const [videoSecret, setVideoSecret] = useState("");
   const [cover, setCover] = useState("");
+  const secureMovieContract = useSecureMovieContract();
 
   const {
     name,
@@ -36,6 +41,9 @@ export default function MovieDetail(props) {
     failureTime,
     videoUrl,
     coverImage,
+    hasTicket,
+    price,
+    ticketAddress
   } = router.query;
 
   useEffect(() => {
@@ -57,6 +65,10 @@ export default function MovieDetail(props) {
   }
 
   function check() {
+    if (hasTicket === "false") {
+      buyTickets()
+      return
+    }
     try {
       let info = parseInt((Date.now() / 1000).toString()).toString();
       let message = {
@@ -121,6 +133,29 @@ export default function MovieDetail(props) {
     }
   }
 
+  function buyTickets() {
+    const movieId = tokenId;
+    console.log(parseEther(price.toString()));
+    console.log(parseEther(price.toString()));
+
+    const overrides = {
+      value: price.toString(),
+    };
+    const transaction = secureMovieContract.buyTicket(
+      movieId,
+      ticketAddress,
+      1,
+      overrides
+    );
+    transactor(transaction, () => {
+      message.success(`purchase successfully`, 3);
+      router.push({
+        pathname: "/",
+        query: null,
+      });
+    });
+  }
+
   const videoJsOptions = {
     autoplay: false,
     controls: true,
@@ -183,7 +218,7 @@ export default function MovieDetail(props) {
                     check();
                   }}
                 >
-                  unlock
+                  {hasTicket === "true" ? "unlock" : "Buy"}
                 </button>
               ) : (
                 <button
