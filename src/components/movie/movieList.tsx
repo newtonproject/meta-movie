@@ -36,7 +36,7 @@ export default function MovieList() {
 
   let ticketWhere = {};
   if (account) {
-    ticketWhere = { owner: account };
+    ticketWhere = { owner: account.toLowerCase() };
   }
 
   const { loading, error, data, fetchMore } = useQuery<SecureMovieInfo>(
