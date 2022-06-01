@@ -73,12 +73,12 @@ export default function MovieCreate() {
       />
     );
 
-    function goHome() {
-      router.push({
-        pathname: "/",
-        query: null,
-      });
-    }
+  function goHome() {
+    router.push({
+      pathname: "/",
+      query: null,
+    });
+  }
 
   async function createSecureMovie() {
     const tokenMetaData = {

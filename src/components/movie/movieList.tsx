@@ -88,7 +88,7 @@ export default function MovieList() {
       : false;
     const hasTicket = movieToken.ticketTokens.length > 0;
     const canView = isOwner || hasTicket;
-    console.log(movieToken.ticketTokens)
+    console.log(movieToken.ticketTokens);
 
     const detailProps = {
       name: tokenMetaData.tokenName,
