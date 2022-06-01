@@ -88,6 +88,7 @@ export default function MovieList() {
       : false;
     const hasTicket = movieToken.ticketTokens.length > 0;
     const canView = isOwner || hasTicket;
+    console.log(movieToken.ticketTokens)
 
     const detailProps = {
       name: tokenMetaData.tokenName,
@@ -122,7 +123,7 @@ export default function MovieList() {
 
     return (
       <div className="list-item" key={item.name}>
-        <span className="name">{item.name}</span>
+        <span className="name">{tokenMetaData.tokenName}</span>
         <div className="cover-container">
           <img
             className="cover"

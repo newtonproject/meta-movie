@@ -11,6 +11,7 @@ import { UriResolver } from "../../functions/UriResolver";
 import { JSON_UPLOAD_URL } from "constant";
 import axios from "axios";
 import ipfsClient from "services/ipfs";
+import { useRouter } from "next/router";
 
 export default function MovieCreate() {
   const { library } = useWeb3React();
@@ -28,6 +29,8 @@ export default function MovieCreate() {
 
   const { account } = useWeb3React();
   const secureMovieContract = useSecureMovieContract();
+
+  const router = useRouter();
 
   const videoUploadProps = {
     name: "file",
@@ -70,6 +73,13 @@ export default function MovieCreate() {
       />
     );
 
+    function goHome() {
+      router.push({
+        pathname: "/",
+        query: null,
+      });
+    }
+
   async function createSecureMovie() {
     const tokenMetaData = {
       name: nftName,
@@ -96,12 +106,17 @@ export default function MovieCreate() {
             maxNumberOfTickets,
             duration
           ),
-          () => {}
+          () => {
+            message.success(`EVT mint success`, 3);
+            goHome();
+          }
         );
+      } else {
+        message.error(`Upload failed`, 3);
       }
     } catch (e) {
       console.log(e);
-      message.error(`mint error:`, e.message);
+      message.error(`mint error:`, 3, e.message);
     }
   }
 
