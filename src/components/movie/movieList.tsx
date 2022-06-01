@@ -135,7 +135,7 @@ export default function MovieList() {
           />
           {/* <button className="preview">Trailer</button> */}
         </div>
-        <span className="price">{price}</span>
+        <span className="price">{price} NEW</span>
         <div className="desc">
           <span className="description">{tokenMetaData.tokenDescription}</span>
           <img
@@ -186,7 +186,6 @@ export default function MovieList() {
       </div>
     );
   }
-
   return (
     <>
     <div className="movie-container">
