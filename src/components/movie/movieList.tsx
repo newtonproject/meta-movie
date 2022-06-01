@@ -126,7 +126,11 @@ export default function MovieList() {
         <div className="cover-container">
           <img
             className="cover"
-            src={tokenMetaData.tokenImage === '' ? "/assets/image/video_placeholder.png" : tokenMetaData.tokenImage}
+            src={
+              tokenMetaData.tokenImage === ""
+                ? "/assets/image/video_placeholder.png"
+                : tokenMetaData.tokenImage
+            }
             alt=""
             onClick={() => {
               // openMovieDetail(detailProps);
@@ -147,7 +151,7 @@ export default function MovieList() {
           />
         </div>
 
-        <div className="panel" hidden={maxTicketNumber<=0}>
+        <div className="panel" hidden={maxTicketNumber <= 0}>
           {/* <Link href="/mint" passHref> */}
           {canView ? (
             <>
@@ -188,18 +192,17 @@ export default function MovieList() {
 
   return (
     <>
-    <div className="movie-container">
-      {/* {
+      <div className="movie-container">
+        {/* {
         loading && <HashLoader color={"#fff000"} loading={true} css={override} size={50} />
       } */}
-      
-      {secureMovieInfos &&
-        secureMovieInfos.map((item, indexed) => {
-          return <MovieListItem key={indexed} item={item} />;
-        })}
-    </div>
-    <Loading loading={loading}/>
-    
+
+        {secureMovieInfos &&
+          secureMovieInfos.map((item, indexed) => {
+            return <MovieListItem key={indexed} item={item} />;
+          })}
+      </div>
+      <Loading loading={loading} />
     </>
   );
 }
