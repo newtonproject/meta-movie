@@ -2,7 +2,7 @@
  * @Author: pony@diynova.com
  * @Date: 2022-05-28 16:39:52
  * @LastEditors: pony@diynova.com
- * @LastEditTime: 2022-05-31 18:08:41
+ * @LastEditTime: 2022-06-14 11:15:01
  * @FilePath: /secure-movie/src/pages/_app.tsx
  * @Description:
  */
@@ -24,14 +24,6 @@ import getLibrary from "../utils/contractUtil";
 import { Fragment } from "react";
 import { HiddenAccount } from "components/account";
 
-function ImportVideo() {
-  return (
-    <>
-      <Script src="/js/video.min.js"></Script>
-      <Script src="/js/videojs-http-streaming.min.js"></Script>
-    </>
-  );
-}
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -43,6 +35,7 @@ function MyApp({ Component, pageProps }) {
           src="/js/videojs-http-streaming.min.js"
           defer
         />
+        <title>Meta Movie</title>
       </Head>
       <ApolloProvider client={client}>
         <Web3ReactProvider getLibrary={getLibrary}>
